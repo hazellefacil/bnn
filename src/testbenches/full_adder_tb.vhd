@@ -2,6 +2,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
 
+
 LIBRARY WORK;
 USE WORK.ALL;
 
@@ -46,8 +47,8 @@ ARCHITECTURE behavioural OF full_adder_tb IS
    -- represent inputs to apply, and three represent the expected outputs.
     
    signal test_case_array : test_case_array_type := (
-             (x"11111111", x"8"),
-				 (x"22222221", x"F")
+             (x"11111111", "1000"),
+				 (x"22222221", "1111")
              );             
 
   -- Define the win subblock, which is the component we are testing
@@ -69,6 +70,42 @@ ARCHITECTURE behavioural OF full_adder_tb IS
    signal pv : std_logic_vector(8*4 - 1 downto 0);
 	signal start : std_logic;
 	signal sum : std_logic_vector(4 - 1 downto 0);
+	
+	-- function for displaying std_logic_vectors
+	function to_hstring(slv: std_logic_vector) return string is
+		 constant hexlen : integer := (slv'length+3)/4;
+		 variable longslv : std_logic_vector(slv'length+3 downto 0) := (others => '0');
+		 variable hex : string(1 to hexlen);
+		 variable fourbit : std_logic_vector(3 downto 0);
+	begin
+		 longslv(slv'length-1 downto 0) := slv;
+		 for i in hexlen-1 downto 0 loop
+			  fourbit := longslv(i*4+3 downto i*4);
+			  case fourbit is
+					when "0000" => hex(hexlen-i) := '0';
+					when "0001" => hex(hexlen-i) := '1';
+					when "0010" => hex(hexlen-i) := '2';
+					when "0011" => hex(hexlen-i) := '3';
+					when "0100" => hex(hexlen-i) := '4';
+					when "0101" => hex(hexlen-i) := '5';
+					when "0110" => hex(hexlen-i) := '6';
+					when "0111" => hex(hexlen-i) := '7';
+					when "1000" => hex(hexlen-i) := '8';
+					when "1001" => hex(hexlen-i) := '9';
+					when "1010" => hex(hexlen-i) := 'A';
+					when "1011" => hex(hexlen-i) := 'B';
+					when "1100" => hex(hexlen-i) := 'C';
+					when "1101" => hex(hexlen-i) := 'D';
+					when "1110" => hex(hexlen-i) := 'E';
+					when "1111" => hex(hexlen-i) := 'F';
+					when "ZZZZ" => hex(hexlen-i) := 'Z';
+					when "UUUU" => hex(hexlen-i) := 'U';
+					when "XXXX" => hex(hexlen-i) := 'X';
+					when others => hex(hexlen-i) := '?';
+			  end case;
+		 end loop;
+		 return hex;
+	end function to_hstring;
 
 begin
 
@@ -98,7 +135,6 @@ begin
 		
 		pv <= (others => '0');
 		start <= '0';
-		sum <= (others => '0');
 
       -- Loop through each element in our test case array.  Each element represents
       -- one test case (along with expected outputs).
@@ -109,36 +145,31 @@ begin
         -- you run this, your transcript window is large enough to see what is happening)
         
         report "-------------------------------------------";
-        report "Test case " & integer'image(i) & ":" &
-                 " pv=" & integer'image(to_integer(unsigned(test_case_array(i).pv))) & 
-                 " sum=" & integer'image(to_integer(unsigned(test_case_array(i).expected_sum)));
+        report LF & "Test case " & integer'image(i) & ":" &
+                 " pv=" & to_hstring(test_case_array(i).pv);
 
         -- assign the values to the inputs of the DUT (design under test)
         
         pv <= test_case_array(i).pv;
-		  
-		  wait for 1 ns;
-		  
 		  start <= '1';
-
+		  
         -- wait for some time, to give the DUT circuit time to respond (1ns is arbitrary)                
 
-        wait for 1 ns;
-		  
-		  
+        wait for 5 ns;
         
         -- now print the results along with the expected results
-      
-        report "Expected result: sum=" & integer'image(to_integer(unsigned(test_case_array(i).expected_sum)));
-        report "Observed result: sum=" & integer'image(to_integer(unsigned(sum)));
+		  
+        report LF & "Expected result: sum=" & to_hstring(test_case_array(i).expected_sum) & LF & "Observed result: sum=" & to_hstring(sum);
 
         -- This assert statement causes a fatal error if there is a mismatch
                                                                     
-        assert (sum = test_case_array(i).expected_sum)
+        assert (unsigned(sum) = unsigned(test_case_array(i).expected_sum))
             report "MISMATCH.  THERE IS A PROBLEM IN YOUR DESIGN THAT YOU NEED TO FIX"
             severity failure;
 				
 			start <= '0';
+			
+			wait for 5 ns;
       end loop;
                                            
       report "================== ALL TESTS PASSED =============================";

@@ -24,21 +24,26 @@ begin
 
 	process(start)
 	
-		variable temp : integer := 0;
+		variable temp : unsigned(numLen - 1 downto 0) := to_unsigned(0, sum'length);
 		
 	begin
 	
 		if (start = '1') then
 		
-			temp := 15;
+			temp := to_unsigned(0, temp'length);
 			
-			iterate : for i in n to 1 loop
+			iterate : for i in 0 to n-1 loop
 				
-				temp := temp + to_integer(unsigned(pv(i*numLen-1 downto (i-1)*numLen)));
+				temp := temp + unsigned( pv( (i+1)*numLen-1 downto i*numLen ) );
 				
 			end loop iterate;
 			
-			sum <= std_logic_vector(to_unsigned(temp, sum'length));
+			if (temp > 0) then
+				sum <= std_logic_vector(temp);
+			else
+				sum <= (others => '0');
+			end if;
+			
 			
 		else
 			
