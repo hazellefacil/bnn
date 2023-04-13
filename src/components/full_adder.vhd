@@ -6,7 +6,7 @@ use ieee.numeric_std.all;
 
 entity full_adder is
 	generic(
-		n : integer := 0;
+		n : integer := 1;
 		numLen : integer := 10
 		);
 	port(
@@ -28,9 +28,9 @@ begin
 		
 	begin
 	
-		if rising_edge(start) then
+		if (start = '1') then
 		
-			temp := 0;
+			temp := 15;
 			
 			iterate : for i in n to 1 loop
 				
@@ -38,9 +38,13 @@ begin
 				
 			end loop iterate;
 			
+			sum <= std_logic_vector(to_unsigned(temp, sum'length));
+			
+		else
+			
+			sum <= (others => '1');
+			
 		end if;
-		
-		sum <= std_logic_vector(to_unsigned(temp, sum'length));
 	
 	end process;
 	
