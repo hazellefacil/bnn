@@ -20,6 +20,8 @@ end full_adder;
 
 architecture behavioural of full_adder is
 
+begin
+
 	process(start)
 	
 		variable temp : integer := 0;
@@ -41,7 +43,5 @@ architecture behavioural of full_adder is
 		sum <= std_logic_vector(to_unsigned(temp, sum'length));
 	
 	end process;
-
-begin
 	
 end behavioural;
