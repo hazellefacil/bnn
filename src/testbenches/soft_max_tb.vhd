@@ -20,14 +20,14 @@ ARCHITECTURE behaviour OF soft_max_tb IS
 			CLOCK_50 : in std_logic; 
 			bb3_done : in std_logic;  
 			reset : in std_logic;
-			vo_3 : in STD_LOGIC_VECTOR(9*numLen downto 0); 
+			vo_3 : in STD_LOGIC_VECTOR(9*numLen - 1 downto 0); 
 			num_encoded : out std_logic_vector(9 downto 0)
 			);
 	end COMPONENT; 
 	
 	SIGNAL CLOCK_50, bb3_done, reset : std_logic;
 	SIGNAL num_encoded : std_logic_vector(9 downto 0);
-	SIGNAL vo_3 : STD_LOGIC_VECTOR(9*numLen downto 0); 
+	SIGNAL vo_3 : STD_LOGIC_VECTOR(9*numLen - 1 downto 0); 
 	
 
 	BEGIN
@@ -51,7 +51,7 @@ ARCHITECTURE behaviour OF soft_max_tb IS
 		WAIT FOR 10 ns; 
 		
 		bb3_done <= '1';
-		vo_3 <= "0001010010000001001000100010001000100010";
+		vo_3 <= "000101001000000100100010001000100010";
 		--given this, the 1 should be at count = 3
 		WAIT FOR 100 ns;
 			
