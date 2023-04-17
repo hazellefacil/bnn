@@ -17,7 +17,7 @@ entity x_norm is
 		mean : in std_logic_vector(numLen - 1 downto 0);
 		variance : in std_logic_vector(numLen - 1 downto 0); 
 		VOB : in STD_LOGIC_VECTOR(n*numLen - 1 downto 0);
-		n_norm_done : out std_logic; 
+		x_norm_done : out std_logic; 
 		x_norm : out std_logic_vector(n*numLen - 1 downto 0)
 		);
 end x_norm;
@@ -37,16 +37,44 @@ architecture behavioural of x_norm is
 	PROCESS(CLOCK_50) 
 		--variables here 
 		variable count, square, var, eps : integer := 0;
-		
+		TYPE state_type IS (s_init, s_wait, s_calculate, s_done); 
+		SIGNAL state : state_type := s_init;
+
 		BEGIN
 		--calculate sqrt(variance + epsilon (unclocked) 
 			eps := to_integer(unsigned(q_e)); 
 			var := to_integer(unsigned(variance)); 
 			square := integer(sqrt(real(eps+var)));
 			
+		-- round this value st we can divide by it 
+			
+		CASE state IS 
+			WHEN s_init =>
+				x_norm_done <= '0';
+			
+			WHEN s_wait => 
+			
+				IF(v_done = '1') THEN 
+					state <= s_calculate;
+				ELSE 
+					state <= s_wait; 
+				END IF;
+			
+			WHEN s_calculate => 
+				
+				
+				-- for each element in vob, normalize
+				
+				count := count + 1;
+				IF(count > n) THEN 
+					state <= s_done;
+				END IF; 
+			
+			WHEN s_done => 
+				x_norm_done <= '1';
+				state <= s_done;
 		
-		--CASE state IS 
-		--END CASE; 
+		END CASE; 
 		
 	END PROCESS; 
 	
