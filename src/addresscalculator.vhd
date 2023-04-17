@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity addresscalculator is
 	port(
-	clk: in std_logic;
+	CLOCK_50: in std_logic;
 	inc_i, rst: in std_logic;
 	addressv_o, address_im: out std_Logic_vector(9 downto 0);
 	address_w1 : out std_logic_vector(17 downto 0); -- max is 18 bits long (784*255+783)
@@ -44,9 +44,9 @@ architecture behavioural of addresscalculator is
 	
 	end process;
 	
-	process(clk, cur_state, next_state)
+	process(CLOCK_50, cur_state, next_state)
 	begin
-		if rising_edge(clk) then
+		if rising_edge(CLOCK_50) then
 			if cur_state = init then
 				if rst_i = '1' then
 					next_state <= rsti_incj;
@@ -71,9 +71,9 @@ architecture behavioural of addresscalculator is
 	
 	end process;
 	
-	process(clk, next_state, rst)
+	process(CLOCK_50, next_state, rst)
 	begin
-		if rising_edge(clk) then
+		if rising_edge(CLOCK_50) then
 			cur_state <= next_state;
 		end if;
 		if rst = '1' then

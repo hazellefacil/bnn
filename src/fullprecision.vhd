@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity fullprecision is
 	port(
-	clk: in std_logic;
+	CLOCK_50: in std_logic;
 	ld_temp, q_w1, ld_mat, rst_temp: in std_logic;
 	q_im: in unsigned(7 downto 0);
 	done: out std_logic;
@@ -19,9 +19,9 @@ architecture behavioural of fullprecision is
 	signal curRow : integer := 0;
 begin
 	
-	process(clk,cur_state,next_state)
+	process(CLOCK_50,cur_state,next_state)
 	begin
-		if rising_edge(clk) then
+		if rising_edge(CLOCK_50) then
 			if (cur_state = init) then
 				next_state <= calculate;
 			elsif (cur_state = calculate) then
@@ -44,9 +44,9 @@ begin
 		end if;
 	end process;
 
-	process(clk, cur_state)
+	process(CLOCK_50, cur_state)
 	begin
-		if rising_edge(clk) then	
+		if rising_edge(CLOCK_50) then	
 			if cur_state = init then
 				curRow <= 0;
 				done <= '0';
@@ -58,7 +58,7 @@ begin
 					temp <= temp+q_im;
 				end if;
 			elsif cur_state = save_row then
-				v_o(((curRow+1)*10-1) downto curRow*10) <= std_logic_vector(temp);
+				v_o(((curRow+1)*10-1) downto curRow*10) <= (7 downto temp'length => '0') & std_logic_vector(temp);
 				curRow <= curRow + 1;
 				temp <= "0000000000";
 			elsif cur_state =done_state then
@@ -67,9 +67,9 @@ begin
 		end if;
 	end process;
 
-	process(clk, next_state,rst_temp)
+	process(CLOCK_50, next_state,rst_temp)
 	begin
-		if rising_edge(clk) then
+		if rising_edge(CLOCK_50) then
 			cur_state <= next_state;
 		end if;
 		if rst_temp = '1' then

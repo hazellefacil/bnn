@@ -14,17 +14,17 @@ architecture behavioural of bnn is
 
 	component fullprecision
 	port(
-	clk: 										in std_logic;
-	ld_temp, q_w1, ld_mat, rst_temp: in std_logic;
-	q_im: 									in unsigned(7 downto 0);
-	done: 									out std_logic;
-	v_o: 										out std_logic_vector(7840 downto 0) -- 784 10 bit unsigned numbers
+		CLOCK_50: 										in std_logic;
+		ld_temp, q_w1, ld_mat, rst_temp: in std_logic;
+		q_im: 									in unsigned(7 downto 0);
+		done: 									out std_logic;
+		v_o: 										out std_logic_vector(7840 downto 0) -- 784 10 bit unsigned numbers
 	);
 	end component;
 
 	component addresscalculator
 	port(
-		clk: 									in std_logic;
+		CLOCK_50: 									in std_logic;
 		inc_i, rst: 						in std_logic;
 		addressv_o, address_im: 		out std_logic_vector(9 downto 0);
 		address_w1 : 						out std_logic_vector(17 downto 0); -- max is 18 bits long (784*255+783)
