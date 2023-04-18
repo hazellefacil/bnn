@@ -21,10 +21,10 @@ ARCHITECTURE test OF popcnt_tb IS
    TYPE test_case_array_type IS ARRAY (0 to 3) OF test_case_record;
     
    signal test_case_array : test_case_array_type := (
-        ((OTHERS => '0'), 0),
+        ((OTHERS => '0'), 6), -- -10
 	((OTHERS => '1'), 10),
-	(("1010100000"), 3),
-	(("1100100110"), 5)
+	(("1010100000"), 12), -- -4
+	(("1100100110"), 0)
     ); 
 
 	COMPONENT popcnt IS

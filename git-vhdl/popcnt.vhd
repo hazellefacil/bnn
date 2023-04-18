@@ -28,8 +28,7 @@ BEGIN
 			tempSUM := tempSUM + (ZERO & INPUT(COUNT)); 
 		END LOOP;
 			
-		--tempSUM := tempSUM(sumLen-2 downto 0) & '0'; -- << 1
-		--tempSUM := tempSUM - numLen;
+		tempSUM := TO_UNSIGNED((2*TO_INTEGER(tempSUM)), sumLen) - numLen;
 			
 		SUM <= tempSUM;
 		DONE <= '1';
