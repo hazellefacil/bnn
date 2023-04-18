@@ -7,42 +7,44 @@ LIBRARY WORK;
 USE WORK.ALL;
 
 ENTITY popcnt_tb IS
-		GENERIC(numLen	: NATURAL := 10;
-				  sumLen	: NATURAL := 4);
+		GENERIC(N	: NATURAL := 128);
 END popcnt_tb;
 
 ARCHITECTURE test OF popcnt_tb IS	
 
 	TYPE test_case_record IS RECORD
-      INPUT : STD_LOGIC_VECTOR(numLen-1 downto 0);
+      INPUT : STD_LOGIC_VECTOR(N-1 downto 0);
       expected_SUM : INTEGER;
    END RECORD;
 
    TYPE test_case_array_type IS ARRAY (0 to 4) OF test_case_record;
+	SIGNAL zero : STD_LOGIC_VECTOR(117 downto 0) := (OTHERS => '0');
+	SIGNAL input1 : STD_LOGIC_VECTOR(N-1 downto 0) := "1010100000" & zero;
+	SIGNAL input2 : STD_LOGIC_VECTOR(N-1 downto 0) := "0001000000" & zero;
+	SIGNAL input3 : STD_LOGIC_VECTOR(N-1 downto 0) := "1100100110" & zero;
     
    signal test_case_array : test_case_array_type := (
-        ((OTHERS => '0'), 6), -- -10
-	((OTHERS => '1'), 10),
-	(("1010100000"), 12), -- -4
-	(("0001000000"), 8),
-	(("1100100110"), 0)
+      ((OTHERS => '0'), -128),
+		((OTHERS => '1'), 128),
+		(input1, -122),
+		(input2, -126),
+		(input3, -118)
     ); 
 
-	COMPONENT popcnt IS
-		GENERIC(numLen	: NATURAL := 10;
-				  sumLen	: NATURAL := 4); 
-		PORT(INPUT 	: IN  STD_LOGIC_VECTOR(numLen-1 downto 0);
-			SUM		: OUT UNSIGNED(sumLen-1 downto 0) := (OTHERS => '0');
+	COMPONENT popcnt_128 IS
+		GENERIC(N	: NATURAL := 128); 
+		PORT(INPUT 	: IN  STD_LOGIC_VECTOR(N-1 downto 0);
+			SUM		: OUT INTEGER := 0;
 			DONE		: OUT STD_LOGIC := '0'); 
-		END COMPONENT;
+	END COMPONENT;
   
 	SIGNAL DONE : STD_LOGIC := '0';
-	SIGNAL INPUT : STD_LOGIC_VECTOR(numLen-1 downto 0) := (OTHERS => '0');
-	SIGNAL SUM : UNSIGNED(sumLen-1 downto 0) := (OTHERS => '0');
+	SIGNAL INPUT : STD_LOGIC_VECTOR(N-1 downto 0) := (OTHERS => '0');
+	SIGNAL SUM : INTEGER := 0;
 	
 BEGIN
 
-   dut : popcnt PORT MAP(INPUT => INPUT, SUM => SUM, DONE => DONE); 
+   dut : popcnt_128 PORT MAP(INPUT => INPUT, SUM => SUM, DONE => DONE); 
  
    PROCESS
 	BEGIN   
@@ -57,9 +59,9 @@ BEGIN
         WAIT FOR 1 ns;
               
         REPORT "Expected result: SUM = " & integer'image(test_case_array(i).expected_SUM);
-        REPORT "Observed result: SUM = " & integer'image(to_integer(SUM));
+        REPORT "Observed result: SUM = " & integer'image(SUM);
                                                                     
-        ASSERT (to_integer(SUM) = test_case_array(i).expected_SUM)
+        ASSERT (SUM = test_case_array(i).expected_SUM)
             REPORT "MISMATCH.  THERE IS A PROBLEM IN YOUR DESIGN THAT YOU NEED TO FIX"
             SEVERITY warning;
 
