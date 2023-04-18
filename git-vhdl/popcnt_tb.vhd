@@ -18,12 +18,13 @@ ARCHITECTURE test OF popcnt_tb IS
       expected_SUM : INTEGER;
    END RECORD;
 
-   TYPE test_case_array_type IS ARRAY (0 to 3) OF test_case_record;
+   TYPE test_case_array_type IS ARRAY (0 to 4) OF test_case_record;
     
    signal test_case_array : test_case_array_type := (
         ((OTHERS => '0'), 6), -- -10
 	((OTHERS => '1'), 10),
 	(("1010100000"), 12), -- -4
+	(("0001000000"), 8),
 	(("1100100110"), 0)
     ); 
 
