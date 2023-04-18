@@ -58,7 +58,7 @@ BEGIN
 		
 		--(VOB - mean) / sqrt(variance + epsilon) 
 		--mean = 2, variance = 2, epsilon = 2;
-		--resulting normalized vector should be: "001000100010"
+		--resulting normalized vector should be: "000100010001"
 		
 		v_done <= '1';
 		VOB <= "010001000100";
