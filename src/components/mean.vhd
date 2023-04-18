@@ -15,7 +15,7 @@ entity mean is
 		vob : in std_logic_vector(n*numLen - 1 downto 0);
 		rst : in std_logic;
 		start : in std_logic;
-		mean_o : out std_logic_vector(numLen - 1 downto 0);
+		mean : out std_logic_vector(numLen - 1 downto 0);
 		mean_done : out std_logic
 		);
 end mean;
@@ -58,7 +58,7 @@ begin
 			case state is
 				when s_reset =>
 					
-					mean_o <= (others => '0');
+					mean <= (others => '0');
 					-- temp := (others => '0');		
 					temp := 0;
 					count := 0;
@@ -83,13 +83,9 @@ begin
 					
 					if vob((count+1)*numLen-1) = '1' then
 						temp := temp - vob_count;
-						-- temp := std_logic_vector(unsigned(temp) - unsigned(vob_count));
 					else
 						temp := temp + vob_count;
-						-- temp := std_logic_vector(unsigned(temp) + unsigned(vob_count));
 					end if;
-					
-					-- temp := std_logic_vector(unsigned(temp) + unsigned(vob_count));
 					
 					count := count + 1;
 					if count = n then
@@ -105,10 +101,10 @@ begin
 					if temp < 0 then
 						temp := -temp;
 						temp2 := std_logic_vector(to_unsigned(temp, temp2'length));
-						mean_o <= '1' & std_logic_vector(to_unsigned(to_integer(shift_right(unsigned(temp2), log2_n)), mean_o'length - 1));
+						mean <= '1' & std_logic_vector(to_unsigned(to_integer(shift_right(unsigned(temp2), log2_n)), mean'length - 1));
 					else
 						temp2 := std_logic_vector(to_unsigned(temp, temp2'length));
-						mean_o <= '0' & std_logic_vector(to_unsigned(to_integer(shift_right(unsigned(temp2), log2_n)), mean_o'length - 1));
+						mean <= '0' & std_logic_vector(to_unsigned(to_integer(shift_right(unsigned(temp2), log2_n)), mean'length - 1));
 					end if;
 					
 					state := s_done;

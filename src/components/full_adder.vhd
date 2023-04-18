@@ -12,7 +12,7 @@ entity full_adder is
 	port(
 		pv : in std_logic_vector(n*numLen - 1 downto 0);
 		start : in std_logic;
-		sum : out std_logic_vector(numLen - 1 downto 0)
+		variance : out std_logic_vector(numLen - 1 downto 0)
 		);
 end full_adder;
 
@@ -24,7 +24,7 @@ begin
 
 	process(start)
 	
-		variable temp : unsigned(numLen - 1 downto 0) := to_unsigned(0, sum'length);
+		variable temp : unsigned(numLen - 1 downto 0) := to_unsigned(0, variance'length);
 		
 	begin
 	
@@ -39,15 +39,14 @@ begin
 			end loop iterate;
 			
 			if (temp > 0) then
-				sum <= std_logic_vector(temp);
+				variance <= std_logic_vector(temp);
 			else
-				sum <= (others => '0');
+				variance <= (others => '0');
 			end if;
-			
 			
 		else
 			
-			sum <= (others => '1');
+			variance <= (others => '1');
 			
 		end if;
 	
