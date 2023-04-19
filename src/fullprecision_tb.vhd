@@ -34,12 +34,12 @@ ARCHITECTURE behavioural OF fullprecision_tb IS
 				ld_temp, q_w1, ld_mat, rst_temp: std_logic;
 				q_im: unsigned(7 downto 0);
 				expected_done: std_logic;
-				expected_v_o: std_logic_vector(7840 downto 0); -- 784 10 bit unsigned numbers
+				expected_v_o: std_logic_vector(9 downto 0); -- 784 10 bit unsigned numbers
    END RECORD;
 
    -- Define a type that is an array of the record.
 
-   TYPE test_case_array_type IS ARRAY (0 to 1) OF test_case_record;
+   TYPE test_case_array_type IS ARRAY (0 to 9) OF test_case_record;
      
    -- Define the array itself.  We will initialize it, one line per test vector.
    -- If we want to add more tests, or change the tests, we can do it here.
@@ -48,8 +48,16 @@ ARCHITECTURE behavioural OF fullprecision_tb IS
    -- represent inputs to apply, and three represent the expected outputs.
     
    signal test_case_array : test_case_array_type := (
-             ('1','0','0','0',"10110011",'1',(others => '0')),
-				 ('0','0','1','0',"00000000",'1',"10110011" & (others => '0'))
+             ('0','1','1','0',"10110011",'0',"0000000000"),
+				 ('1','1','0','0',"00000000",'0',"0000000000"),
+				 ('0','1','1','0',"01111111",'0',"0010110011"),
+				 ('0','1','0','0',"00000000",'0',"0000000000"),
+				 ('0','1','1','0',"00011000",'0',"0000000000"),
+				 ('1','1','0','0',"00000000",'0',"0000000000"),
+				 ('0','1','0','0',"00000000",'0',"0010010111"),
+				 ('0','1','1','0',"01110110",'0',"0000000000"),
+				 ('1','1','0','0',"00000000",'0',"0000000000"),
+				 ('0','1','0','0',"00000000",'0',"0001110110")
              );
 
   -- Define the win subblock, which is the component we are testing
@@ -57,10 +65,10 @@ ARCHITECTURE behavioural OF fullprecision_tb IS
 	COMPONENT fullprecision is
 		port(
 				CLOCK_50: in std_logic;
-				ld_temp, q_w1, ld_mat, rst_temp: in std_logic;
+				ld_temp, q_w1, ld_mat, rst_temp: in std_logic; 
 				q_im: in unsigned(7 downto 0);
 				done: out std_logic;
-				v_o: out std_logic_vector(7840 downto 0) -- 784 10 bit unsigned numbers
+				v_o: out std_logic_vector(7839 downto 0) -- 784 10 bit unsigned numbers
 			);
 	end COMPONENT;
 
@@ -70,7 +78,8 @@ ARCHITECTURE behavioural OF fullprecision_tb IS
 	signal ld_temp, q_w1, ld_mat, rst_temp: std_logic;
 	signal q_im: unsigned(7 downto 0);
 	signal done: std_logic;
-	signal v_o: std_logic_vector(7840 downto 0);
+	signal v_o: std_logic_vector(7839 downto 0);
+	signal isEqual : integer := 1;
 	
 	-- function for displaying std_logic_vectors
 	function to_hstring(slv: std_logic_vector) return string is
@@ -153,10 +162,6 @@ begin
         
         report "-------------------------------------------";
         report LF & "Test case " & integer'image(i) & ":" &
-               --LF & " rst_temp=" & to_integer(unsigned(test_case_array(i).rst_temp)) &
-					--LF & " ld_mat=" & to_integer(unsigned(test_case_array(i).ld_mat)) &
-					--LF & " ld_temp=" & to_integer(unsigned(test_case_array(i).ld_temp)) &
-					--LF & " q_w1=" & to_integer(unsigned(test_case_array(i).q_w1)) &
 					LF & " q_im=" & to_hstring(std_logic_vector(test_case_array(i).q_im));
 
         -- assign the values to the inputs of the DUT (design under test)
@@ -166,21 +171,51 @@ begin
 			ld_mat <= test_case_array(i).ld_mat;
 			q_w1 <= test_case_array(i).q_w1;
 			ld_temp <= test_case_array(i).ld_temp;
-		  
+			
         -- wait for some time, to give the DUT circuit time to respond (1ns is arbitrary)                
 
         wait for 5 ns;
         
         -- now print the results along with the expected results
 		  
-        report LF & "Expected result: v_o=" & to_hstring(test_case_array(i).expected_v_o) & LF & "Observed result: sum=" & to_hstring(v_o);
+       -- report LF & "Expected result: v_o=" & to_hstring(test_case_array(i).expected_v_o) & LF & "Observed result: v_o=" & to_hstring(v_o(7839 downto 7830));
 
         -- This assert statement causes a fatal error if there is a mismatch
-                                                                    
-        assert (unsigned(v_o) = unsigned(test_case_array(i).expected_v_o))
-            report "MISMATCH.  THERE IS A PROBLEM IN YOUR DESIGN THAT YOU NEED TO FIX"
-            severity failure;
+        
+		  if i < 3 then
+				if (unsigned(v_o(7839 downto 7830)) = unsigned(test_case_array(i).expected_v_o)) then
+					isEqual <= 1;
+				else 
+					isEqual <= 0;
+				end if;
+				
+			  report LF & "Expected result: v_o=" & to_hstring(test_case_array(i).expected_v_o) & LF & "Observed result: v_o=" & to_hstring(v_o(7839 downto 7830));
+
+		  elsif i < 7 then
+				if (unsigned(v_o(7829 downto 7820)) = unsigned(test_case_array(i).expected_v_o)) then
+					isEqual <= 1;
+				else 
+					isEqual <= 0;
+				end if;
+				
+			 report LF & "Expected result: v_o=" & to_hstring(test_case_array(i).expected_v_o) & LF & "Observed result: v_o=" & to_hstring(v_o(7829 downto 7820));
 			
+		  else
+				if (unsigned(v_o(7819 downto 7810)) = unsigned(test_case_array(i).expected_v_o)) then
+					isEqual <= 1;
+				else 
+					isEqual <= 0;
+				end if;
+				
+			 report LF & "Expected result: v_o=" & to_hstring(test_case_array(i).expected_v_o) & LF & "Observed result: v_o=" & to_hstring(v_o(7819 downto 7810));
+
+		  end if;
+		  
+			  assert (isEqual = 1)
+            report "MISMATCH.  THERE IS A PROBLEM IN YOUR DESIGN THAT YOU NEED TO FIX"
+            severity failure;	
+
+
 			wait for 5 ns;
       end loop;
                                            

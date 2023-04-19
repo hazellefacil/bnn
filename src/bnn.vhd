@@ -18,7 +18,7 @@ architecture behavioural of bnn is
 		ld_temp, q_w1, ld_mat, rst_temp: in std_logic;
 		q_im: 									in unsigned(7 downto 0);
 		done: 									out std_logic;
-		v_o: 										out std_logic_vector(7840 downto 0) -- 784 10 bit unsigned numbers
+		v_o: 										out std_logic_vector(7839 downto 0) -- 784 10 bit unsigned numbers
 	);
 	end component;
 
@@ -35,7 +35,7 @@ architecture behavioural of bnn is
 	signal ld_temp_fp, q_w1_fp, ld_mat_fp, rst_temp_fp: std_logic;
 	signal q_im_fp : unsigned(7 downto 0);
 	signal done_fp: std_logic;
-	signal v_o_fp: std_logic_vector(7840 downto 0);
+	signal v_o_fp: std_logic_vector(7839 downto 0);
 	
 	signal inc_i_ac, rst_ac, done_ac, rst_temp_ac: std_logic;
 	signal addressv_o_ac, address_im_ac: std_logic_vector(9 downto 0);
