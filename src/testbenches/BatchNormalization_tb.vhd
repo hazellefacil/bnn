@@ -22,6 +22,7 @@ ARCHITECTURE behaviour OF  BatchNormalization_tb IS
 			rst 		: in std_logic;
 			start 	: in std_logic;
 			vob 		: in std_logic_vector(n*numLen - 1 downto 0);
+			epsilon  : in std_logic_vector(numLen - 1  downto 0);
 			gamma 	: in std_logic_vector(numLen - 1  downto 0);
 			g 			: in std_logic;
 			beta 		: in std_logic_vector(numLen - 1 downto 0);
@@ -31,9 +32,9 @@ ARCHITECTURE behaviour OF  BatchNormalization_tb IS
 			 );
 	end COMPONENT;
 	
-	SIGNAL CLOCK_50, rst, start, b, g, Bn_done : std_logic; 
-	SIGNAL gamma, beta   							 : std_logic_vector(numLen -1 downto 0);
-	SIGNAL vob, Bn_out 						 		 : std_logic_vector(n*numLen - 1 downto 0);
+	SIGNAL CLOCK_50, rst, start, b, g, Bn_done, correct : std_logic; 
+	SIGNAL gamma, beta, epsilon  					 : std_logic_vector(numLen -1 downto 0);
+	SIGNAL vob, Bn_out 						 		 : std_logic_vector(n*numLen - 1 downto 0); 
 	
 	
 	BEGIN
@@ -45,6 +46,7 @@ ARCHITECTURE behaviour OF  BatchNormalization_tb IS
             rst => rst,
             start => start,
             vob => vob,
+				epsilon => epsilon,
             gamma => gamma,
             g => g,
             beta => beta,
@@ -62,21 +64,57 @@ ARCHITECTURE behaviour OF  BatchNormalization_tb IS
 	END PROCESS; 
 	
 	testing: PROCESS IS 
+		
 		BEGIN
-			rst <= '0';
+			rst <= '1';
 			start <= '0';
-			g <= '0';
-			b <= '0';
+			g <= '1';
+			b <= '1';
+			correct <= '0';
 			WAIT FOR 10 ns;
 			
-			--test 1: zero case, expected value is value of beta 
-			
+			--test 1: zero case 
+			rst <= '0';
 			start <= '1';
 			vob <= "010000010000010000010000010000010000010000010000";
 			gamma <= "000001";
 			beta <= "000001";
-				
-			WAIT FOR 500 ns; 
+			epsilon <= "000100";
+			WAIT FOR 300 ns; 
+			
+			IF(Bn_out = "000001000001000001000001000001000001000001000001") THEN
+				correct <= '1';
+			ELSE 
+				correct <= '0';
+			END IF;
+			
+			WAIT FOR 10 ns;
+			
+			rst <= '1';
+			start <= '0';
+			correct <= '0';
+			WAIT FOR 50 ns;
+			
+			--test 2: 
+			rst <= '0';
+			start <= '1';
+			vob <= "000100000100000100000100000000000000000000000000";
+			gamma <= "000001";
+			beta <= "000001";
+			epsilon <= "000000";
+
+			
+			WAIT FOR 300 ns; 
+			
+			IF(Bn_out = "000011000011000011000011000001000001000001000001") THEN
+				correct <= '1';
+			ELSE 
+				correct <= '0';
+			END IF;
+			
+			WAIT FOR 10 ns; 
+			
+			correct <= '0';
 			
 
 	WAIT; 

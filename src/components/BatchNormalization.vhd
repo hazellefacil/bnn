@@ -14,6 +14,7 @@ entity BatchNormalization is
 			rst 		: in std_logic;
 			start 	: in std_logic;
 			vob 		: in std_logic_vector(n*numLen - 1 downto 0);
+			epsilon  : in std_logic_vector(numLen - 1  downto 0);
 			gamma 	: in std_logic_vector(numLen - 1  downto 0);
 			g 			: in std_logic;
 			beta 		: in std_logic_vector(numLen - 1 downto 0);
@@ -84,20 +85,21 @@ architecture behavioural of BatchNormalization is
 		generic(
 			n : integer := 0;
 			numLen :integer := 4
-			);
-		port(
-			CLOCK_50 : in std_logic; 
-			v_done 	: in std_logic;
-			q_e 		: in std_logic_vector(numLen - 1 downto 0); 
-			mean 		: in std_logic_vector(numLen - 1 downto 0);
-			variance : in std_logic_vector(numLen - 1 downto 0); 
-			VOB 		: in std_logic_vector(n*numLen - 1 downto 0);
-			x_norm_done : out std_logic; 
-			x_norm 	: out std_logic_vector(n*numLen - 1 downto 0)
+		);
+		  port(
+				CLOCK_50 : in std_logic; 
+				v_done 	: in std_logic;
+				rst		: in std_logic;
+				q_e 		: in std_logic_vector(numLen - 1 downto 0); 
+				mean 		: in std_logic_vector(numLen - 1 downto 0);
+				variance : in std_logic_vector(numLen - 1 downto 0); 
+				VOB 		: in std_logic_vector(n*numLen - 1 downto 0);
+				x_norm_done : out std_logic; 
+				x_norm 	: out std_logic_vector(n*numLen - 1 downto 0)
 			);
 	end component;
 	
-	signal q_e : std_logic_vector(numLen - 1 downto 0) := (others => '0');
+	signal q_e : std_logic_vector(numLen - 1 downto 0) := "000100";
 	signal x_norm1 : std_logic_vector(n*numLen - 1 downto 0);
 	signal x_norm_done : std_logic;
 	
@@ -145,7 +147,7 @@ begin
 	generic map(
 		n => n, numLen => numLen)
 	port map(
-		CLOCK_50, pv_done, q_e, mean1, variance, vob, x_norm_done, x_norm1);
+		CLOCK_50, pv_done,rst, q_e, mean1, variance, vob, x_norm_done, x_norm1);
 	
 	u4 : Bn
 	generic map(
