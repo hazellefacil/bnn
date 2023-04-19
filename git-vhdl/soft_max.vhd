@@ -57,7 +57,7 @@ begin
 			WHEN s_findMax => 
 				
 				IF(num-numLen +1 >= 0) THEN
-					vector_temp <= vo_3(num DOWNTO num - numLen + 1); 
+					--vector_temp <= vo_3(num DOWNTO num - numLen + 1); -- TODO
 				END IF; 
 				
 				IF(to_integer(unsigned(vector_temp)) > t_max) THEN 
