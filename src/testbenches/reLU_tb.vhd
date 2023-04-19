@@ -13,7 +13,7 @@ architecture Behavioural of reLU_tb is
 
 	TYPE test_case_record IS RECORD
 		Bn_x : std_logic_vector(n*numLen - 1 downto 0);
-		expected_relu_x : std_logic_vector(n*numLen - 1 downto 0);
+		expected_relu_x : std_logic_vector(n - 1 downto 0);
    END RECORD;
 
    -- Define a type that is an array of the record.
@@ -27,11 +27,11 @@ architecture Behavioural of reLU_tb is
    -- represent inputs to apply, and three represent the expected outputs.
     
    signal test_case_array : test_case_array_type := (
-		('1' & x"1" & '1' & x"2" & '1' & x"3" & '1' & x"4" & '1' & x"5" & '1' & x"6" & '1' & x"7" & '1' & x"8",
-		 std_logic_vector(to_unsigned(0, n*numLen)))
+		('1' & x"1" & '0' & x"2" & '1' & x"3" & '0' & x"4" & '1' & x"5" & '0' & x"6" & '1' & x"7" & '0' & x"8",
+		 "01010101")
 		,
 		('0' & x"1" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8",
-		 '0' & x"1" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8")
+		 "11111111")
       );
 
 	component reLU is
@@ -44,7 +44,7 @@ architecture Behavioural of reLU_tb is
 			Bn_x : in std_logic_vector(n*numLen - 1 downto 0);
 			rst : in std_logic;
 			Bn_done : in std_logic;
-			relu_x : out std_logic_vector(n*numLen - 1 downto 0);
+			relu_x : out std_logic_vector(n - 1 downto 0);
 			relu_done : out std_logic
 			);
 	end component;
@@ -54,8 +54,9 @@ architecture Behavioural of reLU_tb is
 	signal rst : std_logic := '0';
 	signal Bn_done : std_logic := '0';
 	
-	signal relu_x : std_logic_vector(n*numLen - 1 downto 0);
+	signal relu_x : std_logic_vector(n - 1 downto 0);
 	signal relu_done : std_logic;
+	signal correct : std_logic := '0';
 	
 	begin
 
@@ -99,6 +100,11 @@ architecture Behavioural of reLU_tb is
 		Bn_done <= '1';
 		wait for (n+2)*T;
 		-- takes n*T ns to calculate + extra time
+		if relu_x = test_case_array(i).expected_relu_x then
+			correct <= '1';
+		else
+			correct <= '0';
+		end if;
 		
    end loop;
 	

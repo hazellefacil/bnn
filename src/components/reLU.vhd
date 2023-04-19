@@ -14,7 +14,7 @@ entity reLU is
 		Bn_x : in std_logic_vector(n*numLen - 1 downto 0);
 		rst : in std_logic;
 		Bn_done : in std_logic;
-		relu_x : out std_logic_vector(n*numLen - 1 downto 0);
+		relu_x : out std_logic_vector(n - 1 downto 0);
 		relu_done : out std_logic
 		);
 end reLU;
@@ -23,7 +23,7 @@ end reLU;
 
 architecture behavioural of reLU is
 
-	type state_type is (s_reset, s_clear, s_wait, s_reLU, s_done);
+	type state_type is (s_reset, s_wait, s_reLU, s_done);
 
 begin
 
@@ -42,24 +42,9 @@ begin
 				when s_reset =>
 				
 					count := 0;
-					E <= '0';
-					D <= '0';
-					state := s_clear;
-					
+					relu_x <= (others => '0');
 					relu_done <= '0';
-					
-				when s_clear =>
-				
-					relu_x( (count+1)*numLen-1 downto count*numLen ) <= (others => '0');
-					
-					count := count + 1;
-					if count = n then
-						state := s_wait;
-					else
-						state := s_clear;
-					end if;
-					
-					relu_done <= '0';
+					state := s_wait;
 					
 				when s_wait => 
 					
@@ -77,11 +62,11 @@ begin
 				
 					Bn_count := Bn_x( (count+1)*numLen-1 downto count*numLen );
 					
-					if Bn_count(numLen-1) = '1' then
-						Bn_count := (others => '0');
+					if Bn_count(numLen-1) = '1' then -- is negative -> 0
+						relu_x(count) <= '0';
+					else -- is positive -> 1
+						relu_x(count) <= '1';
 					end if;
-					
-					relu_x( (count+1)*numLen-1 downto count*numLen ) <= Bn_count;
 					
 					count := count + 1;
 					if count = n then
