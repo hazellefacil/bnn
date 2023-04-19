@@ -8,8 +8,9 @@ end BatchNormalization_tb;
 
 ARCHITECTURE behaviour OF  BatchNormalization_tb IS 
 
-	CONSTANT n : integer := 3; 
-	CONSTANT numLen : integer := 4;
+	-- example values: it would actually be n =128 and numLen = # of bits to rep. (2^8)
+	CONSTANT n : integer := 8; 
+	CONSTANT numLen : integer := 6;
 	
 	COMPONENT BatchNormalization is
 		generic(
@@ -21,18 +22,18 @@ ARCHITECTURE behaviour OF  BatchNormalization_tb IS
 			rst 		: in std_logic;
 			start 	: in std_logic;
 			vob 		: in std_logic_vector(n*numLen - 1 downto 0);
-			gamma 	: in std_logic_vector(numLen downto 0);
+			gamma 	: in std_logic_vector(numLen - 1  downto 0);
 			g 			: in std_logic;
-			beta 		: in std_logic_vector(numLen downto 0);
+			beta 		: in std_logic_vector(numLen - 1 downto 0);
 			b 			: in std_logic;
-			Bn 		: out std_logic_vector(n*numLen - 1 downto 0);
+			Bn_out 	: out std_logic_vector(n*numLen - 1 downto 0);
 			Bn_done 	: out std_logic
 			 );
 	end COMPONENT;
 	
 	SIGNAL CLOCK_50, rst, start, b, g, Bn_done : std_logic; 
-	SIGNAL gamma, beta   							 : std_logic_vector(numLen downto 0);
-	SIGNAL vob, Bn 						 			 : std_logic_vector(n*numLen - 1 downto 0);
+	SIGNAL gamma, beta   							 : std_logic_vector(numLen -1 downto 0);
+	SIGNAL vob, Bn_out 						 		 : std_logic_vector(n*numLen - 1 downto 0);
 	
 	
 	BEGIN
@@ -48,10 +49,37 @@ ARCHITECTURE behaviour OF  BatchNormalization_tb IS
             g => g,
             beta => beta,
             b => b,
-            Bn => Bn,
+            Bn_out => Bn_out,
             Bn_done => Bn_done
         );
+		  
+	clock: PROCESS IS
+		BEGIN
+			CLOCK_50 <= '0'; 
+			WAIT FOR 1 ns; 
+			CLOCK_50 <= '1';
+			WAIT FOR 1 ns;
+	END PROCESS; 
 	
+	testing: PROCESS IS 
+		BEGIN
+			rst <= '0';
+			start <= '0';
+			g <= '0';
+			b <= '0';
+			WAIT FOR 10 ns;
+			
+			--test 1: zero case, expected value is value of beta 
+			
+			start <= '1';
+			vob <= "010000010000010000010000010000010000010000010000";
+			gamma <= "000001";
+			beta <= "000001";
+				
+			WAIT FOR 500 ns; 
+			
 
-
+	WAIT; 
+	END PROCESS;
+		  
 END behaviour; 

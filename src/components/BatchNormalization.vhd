@@ -14,9 +14,9 @@ entity BatchNormalization is
 			rst 		: in std_logic;
 			start 	: in std_logic;
 			vob 		: in std_logic_vector(n*numLen - 1 downto 0);
-			gamma 	: in std_logic_vector(numLen downto 0);
+			gamma 	: in std_logic_vector(numLen - 1  downto 0);
 			g 			: in std_logic;
-			beta 		: in std_logic_vector(numLen downto 0);
+			beta 		: in std_logic_vector(numLen - 1 downto 0);
 			b 			: in std_logic;
 			Bn_out 	: out std_logic_vector(n*numLen - 1 downto 0);
 			Bn_done 	: out std_logic
