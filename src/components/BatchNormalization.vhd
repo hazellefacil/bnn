@@ -5,27 +5,27 @@ use ieee.numeric_std.all;
 -- Entity part of the description.  Describes inputs and outputs
 
 entity BatchNormalization is
-	generic(
-		n : integer := 256; -- could be 128 or 256
-		numLen : integer := 10
-		);
-	port(
-		CLOCK_50 : in std_logic;
-		rst : in std_logic;
-		start : in std_logic;
-		vob : in std_logic_vector(n*numLen - 1 downto 0);
-		gamma : in std_logic_vector(numLen downto 0);
-		g : in std_logic;
-		beta : in std_logic_vector(numLen downto 0);
-		b : in std_logic;
-		Bn : out std_logic_vector(n*numLen - 1 downto 0);
-		Bn_done : out std_logic
-		 );
-end Bn;
+		generic(
+			n 		 : integer := 256; -- could be 128 or 256
+			numLen : integer := 10
+			);
+		port(
+			CLOCK_50 : in std_logic;
+			rst 		: in std_logic;
+			start 	: in std_logic;
+			vob 		: in std_logic_vector(n*numLen - 1 downto 0);
+			gamma 	: in std_logic_vector(numLen downto 0);
+			g 			: in std_logic;
+			beta 		: in std_logic_vector(numLen downto 0);
+			b 			: in std_logic;
+			Bn_out 	: out std_logic_vector(n*numLen - 1 downto 0);
+			Bn_done 	: out std_logic
+			 );
+end BatchNormalization;
 
 -- Architecture part of the description
 
-architecture behavioural of Bn is
+architecture behavioural of BatchNormalization is
 
 	type state_type is (s_reset, s_wait, s_Bn, s_done);
 	
@@ -44,7 +44,7 @@ architecture behavioural of Bn is
 			);
 	end component;
 	
-	signal mean : std_logic_vector(numLen - 1 downto 0) := (others => '0');
+	signal mean1 : std_logic_vector(numLen - 1 downto 0) := (others => '0');
 	signal mean_done : std_logic := '0';
 	
 	component prevariance is
@@ -64,7 +64,7 @@ architecture behavioural of Bn is
 	end component;
 	
 	signal pv : STD_LOGIC_VECTOR(n*numLen -1 DOWNTO 0);
-	signal pv_done std_logic;
+	signal pv_done : std_logic;
 	
 	component full_adder is
 		generic(
@@ -98,7 +98,7 @@ architecture behavioural of Bn is
 	end component;
 	
 	signal q_e : std_logic_vector(numLen - 1 downto 0) := (others => '0');
-	signal x_norm : std_logic_vector(n*numLen - 1 downto 0);
+	signal x_norm1 : std_logic_vector(n*numLen - 1 downto 0);
 	signal x_norm_done : std_logic;
 	
 	component Bn is
@@ -119,6 +119,7 @@ architecture behavioural of Bn is
 			Bn_done : out std_logic
 			 );
 	end component;
+	
 
 begin
 
@@ -126,13 +127,13 @@ begin
 	generic map(
 		n => n, numLen => numLen)
 	port map(
-		CLOCK_50, vob, rst, start, mean, mean_done);
+		CLOCK_50, vob, rst, start, mean1, mean_done);
 		
 	u1 : prevariance
 	generic map(
 		n => n, numLen => numLen)
 	port map(
-		CLOCK_50, mean, rst, mean_done, vob, pv, pv_done);
+		CLOCK_50, mean1, rst, mean_done, vob, pv, pv_done);
 		
 	u2 : full_adder
 	generic map(
@@ -144,12 +145,12 @@ begin
 	generic map(
 		n => n, numLen => numLen)
 	port map(
-		CLOCK_50, pv_done, q_e, mean, variance, vob, x_norm_done, x_norm);
+		CLOCK_50, pv_done, q_e, mean1, variance, vob, x_norm_done, x_norm1);
 	
 	u4 : Bn
 	generic map(
 		n => n, numLen => numLen)
 	port map(
-		CLOCK_50, rst, x_norm_done, gamma, g, beta, b, Bn, Bn_done);
+		CLOCK_50 => CLOCK_50, rst=> rst, start => x_norm_done,x_norm => x_norm1, gamma =>gamma, g=>g, beta=> beta, b=>b,Bn => Bn_out,Bn_done => Bn_done);
 	
 end behavioural;
