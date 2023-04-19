@@ -1,0 +1,508 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/hazel/ensc350/lab5/lab4/working
+Ebatchnormalization
+Z0 w1681889503
+Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z4 dC:/Users/hazel/ensc350_proj/bnn/src/testbenches
+Z5 8C:/Users/hazel/ensc350_proj/bnn/src/components/BatchNormalization.vhd
+Z6 FC:/Users/hazel/ensc350_proj/bnn/src/components/BatchNormalization.vhd
+l0
+L7
+VGL2dd`KUnbfV[Df`ZL<Ke0
+!s100 UF>Y0Zm[PDYBoOGM?5iSD2
+Z7 OV;C;10.5b;63
+32
+Z8 !s110 1681935020
+!i10b 1
+Z9 !s108 1681935020.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/components/BatchNormalization.vhd|
+Z11 !s107 C:/Users/hazel/ensc350_proj/bnn/src/components/BatchNormalization.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Abehavioural
+R1
+R2
+R3
+DEx4 work 18 batchnormalization 0 22 GL2dd`KUnbfV[Df`ZL<Ke0
+l126
+L29
+V0UCX_Q_;HI<V_;FGif[[o3
+!s100 ?6JZXi>ZnUhYT3?]5X9N[1
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Ebatchnormalization_tb
+Z14 w1681934997
+R1
+R2
+R3
+R4
+Z15 8C:/Users/hazel/ensc350_proj/bnn/src/testbenches/BatchNormalization_tb.vhd
+Z16 FC:/Users/hazel/ensc350_proj/bnn/src/testbenches/BatchNormalization_tb.vhd
+l0
+L6
+VgWU>IF_MmMJPaRmWo=V^R2
+!s100 fSRE4;V9ZdYCK1gE4AgWA3
+R7
+32
+R8
+!i10b 1
+R9
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/testbenches/BatchNormalization_tb.vhd|
+Z18 !s107 C:/Users/hazel/ensc350_proj/bnn/src/testbenches/BatchNormalization_tb.vhd|
+!i113 1
+R12
+R13
+Abehaviour
+R1
+R2
+R3
+DEx4 work 21 batchnormalization_tb 0 22 gWU>IF_MmMJPaRmWo=V^R2
+l40
+L9
+VZK5UTmhzfn]h7Qz3W4AcF2
+!s100 H1TROXV;^`BICj:_76^[E2
+R7
+32
+R8
+!i10b 1
+R9
+R17
+R18
+!i113 1
+R12
+R13
+Ebn
+Z19 w1681932608
+R1
+R2
+R3
+R4
+Z20 8C:/Users/hazel/ensc350_proj/bnn/src/components/Bn.vhd
+Z21 FC:/Users/hazel/ensc350_proj/bnn/src/components/Bn.vhd
+l0
+L7
+VDNCR_?Df093^8;eBAJKV63
+!s100 Igi[aYlkKi]^D420NcUFV3
+R7
+32
+Z22 !s110 1681935021
+!i10b 1
+Z23 !s108 1681935021.000000
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/components/Bn.vhd|
+Z25 !s107 C:/Users/hazel/ensc350_proj/bnn/src/components/Bn.vhd|
+!i113 1
+R12
+R13
+Abehavioural
+R1
+R2
+R3
+DEx4 work 2 bn 0 22 DNCR_?Df093^8;eBAJKV63
+l33
+L28
+VLE;O:=0MN3T@=RIRk>GQm0
+!s100 eW3m>>FR;fC:TCG]kiEJ10
+R7
+32
+R22
+!i10b 1
+R23
+R24
+R25
+!i113 1
+R12
+R13
+Efull_adder
+Z26 w1681870050
+R1
+R2
+R3
+R4
+Z27 8C:/Users/hazel/ensc350_proj/bnn/src/components/full_adder.vhd
+Z28 FC:/Users/hazel/ensc350_proj/bnn/src/components/full_adder.vhd
+l0
+L7
+VfkdF5NJ;^@_MLN^WKREQ30
+!s100 He?BR`]?S8;YQ0BUE1Co]1
+R7
+32
+R22
+!i10b 1
+R23
+Z29 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/components/full_adder.vhd|
+Z30 !s107 C:/Users/hazel/ensc350_proj/bnn/src/components/full_adder.vhd|
+!i113 1
+R12
+R13
+Abehavioural
+R1
+R2
+R3
+DEx4 work 10 full_adder 0 22 fkdF5NJ;^@_MLN^WKREQ30
+l23
+L21
+Vkz]l2]=5<XDCTGaMWb52b3
+!s100 d_;86EADG<Wa@d=T:_03@1
+R7
+32
+R22
+!i10b 1
+R23
+R29
+R30
+!i113 1
+R12
+R13
+Efull_adder_tb
+Z31 w1681406780
+R1
+R2
+R3
+R4
+Z32 8C:/Users/hazel/ensc350_proj/bnn/src/testbenches/full_adder_tb.vhd
+Z33 FC:/Users/hazel/ensc350_proj/bnn/src/testbenches/full_adder_tb.vhd
+l0
+L19
+ViaY=UdmmHnGLk`:KM>`[:3
+!s100 JW_iYiEJLgff8f@YVad^`3
+R7
+32
+Z34 !s110 1681407138
+!i10b 1
+Z35 !s108 1681407138.000000
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/testbenches/full_adder_tb.vhd|
+Z37 !s107 C:/Users/hazel/ensc350_proj/bnn/src/testbenches/full_adder_tb.vhd|
+!i113 1
+R12
+R13
+Abehavioural
+R1
+R2
+R3
+DEx4 work 13 full_adder_tb 0 22 iaY=UdmmHnGLk`:KM>`[:3
+l73
+L25
+VRjKoHz2NB8MkaZ7cfgICI2
+!s100 F3Xh8mRAJJ:ELWJ>IVNU73
+R7
+32
+R34
+!i10b 1
+R35
+R36
+R37
+!i113 1
+R12
+R13
+Emean
+Z38 w1681885426
+Z39 DPx4 ieee 9 math_real 0 22 Sk6CSihbPL<f[^Shm]=KX0
+R1
+R2
+R3
+R4
+Z40 8C:/Users/hazel/ensc350_proj/bnn/src/components/mean.vhd
+Z41 FC:/Users/hazel/ensc350_proj/bnn/src/components/mean.vhd
+l0
+L8
+Vc7n7W?N7I7<N6>fI`WDF30
+!s100 Z1C6CRcW6XTTUfB08FJmH1
+R7
+32
+R22
+!i10b 1
+R9
+Z42 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/components/mean.vhd|
+Z43 !s107 C:/Users/hazel/ensc350_proj/bnn/src/components/mean.vhd|
+!i113 1
+R12
+R13
+Abehavioural
+R39
+R1
+R2
+R3
+DEx4 work 4 mean 0 22 c7n7W?N7I7<N6>fI`WDF30
+l33
+L25
+V<NkL[LL2N;2@O_W=QTZ652
+!s100 >R<X0HMcl_^k:9zMhUUB;0
+R7
+32
+R22
+!i10b 1
+R9
+R42
+R43
+!i113 1
+R12
+R13
+Eprevariance
+Z44 w1681933492
+R39
+R1
+R2
+R3
+R4
+Z45 8C:/Users/hazel/ensc350_proj/bnn/src/components/prevariance.vhd
+Z46 FC:/Users/hazel/ensc350_proj/bnn/src/components/prevariance.vhd
+l0
+L9
+VPf2V:e:RLaSEFDVdff7lY0
+!s100 PXH@1Z^?Go0j25SCXe@MN0
+R7
+32
+R22
+!i10b 1
+R23
+Z47 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/components/prevariance.vhd|
+Z48 !s107 C:/Users/hazel/ensc350_proj/bnn/src/components/prevariance.vhd|
+!i113 1
+R12
+R13
+Abehavioural
+R39
+R1
+R2
+R3
+DEx4 work 11 prevariance 0 22 Pf2V:e:RLaSEFDVdff7lY0
+l34
+L28
+VRHg<5>:NZoz]f3N6U^2b90
+!s100 QoF^S`00D;22deo=Q_[kN0
+R7
+32
+R22
+!i10b 1
+R23
+R47
+R48
+!i113 1
+R12
+R13
+Eprevariance_tb
+Z49 w1681865408
+R1
+R2
+R3
+R4
+Z50 8C:/Users/hazel/ensc350_proj/bnn/src/testbenches/prevariance_tb.vhd
+Z51 FC:/Users/hazel/ensc350_proj/bnn/src/testbenches/prevariance_tb.vhd
+l0
+L5
+VAZ5N7PG_i]Mk199;CKN[73
+!s100 Ro_O9hS`T^l=9ndafMD5`0
+R7
+32
+Z52 !s110 1681866884
+!i10b 1
+Z53 !s108 1681866884.000000
+Z54 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/testbenches/prevariance_tb.vhd|
+Z55 !s107 C:/Users/hazel/ensc350_proj/bnn/src/testbenches/prevariance_tb.vhd|
+!i113 1
+R12
+R13
+Abehaviour
+R1
+R2
+R3
+DEx4 work 14 prevariance_tb 0 22 AZ5N7PG_i]Mk199;CKN[73
+l33
+L8
+VUKL`GEl2AKTOeoYME`k381
+!s100 VLnZ7;Z]OBH0a7^zRKnCi0
+R7
+32
+R52
+!i10b 1
+R53
+R54
+R55
+!i113 1
+R12
+R13
+Esoft_max
+Z56 w1681715549
+R1
+R2
+R3
+R4
+Z57 8C:/Users/hazel/ensc350_proj/bnn/src/components/soft_max.vhd
+Z58 FC:/Users/hazel/ensc350_proj/bnn/src/components/soft_max.vhd
+l0
+L8
+Vg_6???`KYI5h7kK1lE>880
+!s100 :QgXNOodVzBLda6fNa?AY1
+R7
+32
+Z59 !s110 1681715562
+!i10b 1
+Z60 !s108 1681715562.000000
+Z61 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/components/soft_max.vhd|
+Z62 !s107 C:/Users/hazel/ensc350_proj/bnn/src/components/soft_max.vhd|
+!i113 1
+R12
+R13
+Abehavioural
+R1
+R2
+R3
+DEx4 work 8 soft_max 0 22 g_6???`KYI5h7kK1lE>880
+l29
+L22
+V5nLR6:`;Nb^jI0MQk4X4@0
+!s100 FiJD::UdcMaRf?k@>eS<R3
+R7
+32
+R59
+!i10b 1
+R60
+R61
+R62
+!i113 1
+R12
+R13
+Esoft_max_tb
+Z63 w1681710031
+R1
+R2
+R3
+R4
+Z64 8C:/Users/hazel/ensc350_proj/bnn/src/testbenches/soft_max_tb.vhd
+Z65 FC:/Users/hazel/ensc350_proj/bnn/src/testbenches/soft_max_tb.vhd
+l0
+L5
+V;O]jYjMHa>PVCg?LN=Ele2
+!s100 dL:[680gHKIma?n:DDnh71
+R7
+32
+R59
+!i10b 1
+R60
+Z66 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/testbenches/soft_max_tb.vhd|
+Z67 !s107 C:/Users/hazel/ensc350_proj/bnn/src/testbenches/soft_max_tb.vhd|
+!i113 1
+R12
+R13
+Abehaviour
+R1
+R2
+R3
+DEx4 work 11 soft_max_tb 0 22 ;O]jYjMHa>PVCg?LN=Ele2
+l33
+L8
+VN4^E]3@KDmTnab4=zYmBd0
+!s100 Kz610lG=9H7j3VlicL`N32
+R7
+32
+R59
+!i10b 1
+R60
+R66
+R67
+!i113 1
+R12
+R13
+Ex_norm
+Z68 w1681933185
+R39
+R1
+R2
+R3
+R4
+Z69 8C:/Users/hazel/ensc350_proj/bnn/src/components/x_norm.vhd
+Z70 FC:/Users/hazel/ensc350_proj/bnn/src/components/x_norm.vhd
+l0
+L9
+VV@ek@Gk@]k[Pi3YjgEC6a2
+!s100 SGX20FJGDg087dP2TVW963
+R7
+32
+R22
+!i10b 1
+R23
+Z71 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/components/x_norm.vhd|
+Z72 !s107 C:/Users/hazel/ensc350_proj/bnn/src/components/x_norm.vhd|
+!i113 1
+R12
+R13
+Abehavioural
+R39
+R1
+R2
+R3
+Z73 DEx4 work 6 x_norm 0 22 V@ek@Gk@]k[Pi3YjgEC6a2
+l36
+L29
+Z74 V_zF4YaoTMRh@i@Z`IF=zk3
+Z75 !s100 1i;O?PcW4bK[eHPcA<4XB2
+R7
+32
+R22
+!i10b 1
+R23
+R71
+R72
+!i113 1
+R12
+R13
+Ex_norm_tb
+Z76 w1681930677
+R1
+R2
+R3
+R4
+Z77 8C:/Users/hazel/ensc350_proj/bnn/src/testbenches/x_norm_tb.vhd
+Z78 FC:/Users/hazel/ensc350_proj/bnn/src/testbenches/x_norm_tb.vhd
+l0
+L5
+VzfAGNj0UK[of0kf><X5Ke3
+!s100 eiIJ<;0JHnAFCML7YmAWk1
+R7
+32
+Z79 !s110 1681930830
+!i10b 1
+Z80 !s108 1681930830.000000
+Z81 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/hazel/ensc350_proj/bnn/src/testbenches/x_norm_tb.vhd|
+Z82 !s107 C:/Users/hazel/ensc350_proj/bnn/src/testbenches/x_norm_tb.vhd|
+!i113 1
+R12
+R13
+Abehaviour
+R1
+R2
+R3
+DEx4 work 9 x_norm_tb 0 22 zfAGNj0UK[of0kf><X5Ke3
+l57
+L9
+V`OK<MkKVa`gaDbYmF>=oc1
+!s100 DPVHb[>PYB[Bz5mI1?MF83
+R7
+32
+R79
+!i10b 1
+R80
+R81
+R82
+!i113 1
+R12
+R13

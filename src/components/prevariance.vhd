@@ -1,6 +1,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.math_real.all;
+
 
 -- Entity part of the description.  Describes inputs and outputs
 
@@ -38,12 +40,8 @@ begin
 	
 	BEGIN
 	
-	IF(n = 256) THEN
-		shift := 8; 
-	ELSIF (n = 128) THEN
-		shift := 7;
-	END IF;
-	
+		shift := integer(floor(log2(real(n)))) + 1;
+
 	if rst = '1' then
 		state <= s_init;
 	ELSIF(rising_edge(CLOCK_50)) THEN 

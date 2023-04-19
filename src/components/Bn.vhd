@@ -43,6 +43,7 @@ begin
 		
 			state := s_reset;
 			count := 0;
+			Bn <= (others => '0');
 		
 		elsif rising_edge(CLOCK_50) then
 		

@@ -83,7 +83,7 @@ architecture behavioural of x_norm is
 					--x_Norm(count) = VOB(count) - mean / sqrt(variance + epsilon) 
 					--it's saying integer divide by 0
 				
-					t_vob := (to_integer(signed(VOB(num DOWNTO num-numLen + 1))) - to_integer(signed(mean))) / square;
+					t_vob := (to_integer(unsigned(VOB(num DOWNTO num-numLen + 1))) - to_integer(unsigned(mean))) / square;
 					x_norm_temp(num DOWNTO num-numLen +1) <= std_logic_vector(to_unsigned(t_vob, numLen));
 					
 				END IF; 

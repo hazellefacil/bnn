@@ -98,7 +98,8 @@ ARCHITECTURE behaviour OF  BatchNormalization_tb IS
 			--test 2: 
 			rst <= '0';
 			start <= '1';
-			vob <= "000100000100000100000100000000000000000000000000";
+			--x8888 x0000
+			vob <= "00" & x"8" & "00" & x"8" & "00" & x"8" & "00" & x"8" & x"000000";
 			gamma <= "000001";
 			beta <= "000001";
 			epsilon <= "000000";
@@ -106,7 +107,7 @@ ARCHITECTURE behaviour OF  BatchNormalization_tb IS
 			
 			WAIT FOR 300 ns; 
 			
-			IF(Bn_out = "000011000011000011000011000001000001000001000001") THEN
+			IF(Bn_out = "000010000010000010000010000010000010000010000010") THEN
 				correct <= '1';
 			ELSE 
 				correct <= '0';

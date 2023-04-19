@@ -33,7 +33,26 @@ ARCHITECTURE behaviour OF  x_norm_tb IS
 	SIGNAL CLOCK_50, v_done, x_norm_done, rst : std_logic;
 	SIGNAL q_e, mean, variance 			 		: std_logic_vector(numLen - 1 downto 0); 
 	SIGNAL VOB, v_x_norm 						 	: std_logic_vector(n*numLen - 1 downto 0);
+	SIGNAL correct 									: std_logic; 
 	
+	TYPE test_case_record IS RECORD
+		vob 			  : std_logic_vector(n*numLen - 1 downto 0);
+		expected_norm : std_logic_vector(n*numLen - 1 downto 0);
+		mean 			  : std_logic_vector(numLen - 1 downto 0); 
+		variance 	  : std_logic_vector(numLen - 1 downto 0);
+		q_e 			  : std_logic_vector(numLen - 1 downto 0);
+   END RECORD;
+
+	
+	TYPE test_case_array_type IS ARRAY (0 to 3) OF test_case_record;
+	
+	   signal test_case_array : test_case_array_type := (
+		("011001100110", "000000000000", "0110", "0110","1001"), --mean = 6, variance = 0, epsilon = 9; 
+		("010001000100","000100010001","0010","0010","0010"), --mean = 2, variance = 2, epsilon = 2;	
+		(x"888",x"222", x"4", x"2", x"2"),--mean = 4, variance = 2, epsilon = 2;
+		("101010101010", "001100110011", "0001", "1001", "0000") -- mean = 1, variance = 9, epsilon = 0;
+      );
+		
 
 BEGIN
 
@@ -54,21 +73,39 @@ BEGIN
 	xnrm: PROCESS IS 
 		BEGIN
 		
-		rst <= '0';
-		v_done <= '0';
-		WAIT FOR 10 ns;
+
 		
 		--(VOB - mean) / sqrt(variance + epsilon) 
-		--mean = 2, variance = 2, epsilon = 2;
-		--resulting normalized vector should be: "000100010001"
 		
-		v_done <= '1';
-		VOB <= "010001000100";
-		mean <= "0010";
-		variance <= "0010";
-		q_e <= "0010";
+		for i in test_case_array'low to test_case_array'high loop
+			
+			correct <= '0';
+			v_done <= '0';
+			rst <= '1';
+			WAIT FOR 10 ns; 
+			
+			v_done <= '0';
+			rst <= '0';
+			VOB <= test_case_array(i).vob;
+			mean <=test_case_array(i).mean;
+			variance <= test_case_array(i).variance;
+			q_e <= test_case_array(i).q_e;
+			WAIT FOR 10 ns;
+			
+			v_done <= '1';		
+			WAIT FOR 100 ns;
+			
+			IF(v_x_norm = test_case_array(i).expected_norm) THEN 
+				correct <= '1';
+			ELSE
+				correct <= '0';
+			END IF;
+			WAIT FOR 10 ns;
+					
 		
-		WAIT FOR 100 ns;		
+		end loop; 
+
+	
 		
 	WAIT; 
 	END PROCESS; 
