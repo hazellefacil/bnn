@@ -8,33 +8,31 @@ USE WORK.ALL;
 
 ENTITY bmxbv_tb IS
 		GENERIC(N 	: NATURAL := 128;
-				  numLen	: NATURAL := 10);
+			M	: NATURAL := 10);
 END bmxbv_tb;
 
 ARCHITECTURE test OF bmxbv_tb IS	
 
-	TYPE test_case_record IS RECORD
+   TYPE test_case_record IS RECORD
       vix : STD_LOGIC_VECTOR(N-1 downto 0);
-		qwx : STD_LOGIC_VECTOR(N-1 downto 0);
-      expected_vox : INTEGER;
+      expected_vox : STD_LOGIC_VECTOR((10*M) -1 downto 0);
    END RECORD;
 
-   TYPE test_case_array_type IS ARRAY (0 to 5) OF test_case_record;
+   TYPE test_case_array_type IS ARRAY (0 to 4) OF test_case_record;
    SIGNAL zero : STD_LOGIC_VECTOR(N-11 downto 0) := (OTHERS => '0');
-   SIGNAL input1 : STD_LOGIC_VECTOR(N-1 downto 0) := "1010100000" & zero;
-   SIGNAL input2 : STD_LOGIC_VECTOR(N-1 downto 0) := "0001000000" & zero;
-   SIGNAL input3 : STD_LOGIC_VECTOR(N-1 downto 0) := "1100100110" & zero;
    SIGNAL v1 : STD_LOGIC_VECTOR(N-1 downto 0) := "0010100000" & zero;
    SIGNAL v2 : STD_LOGIC_VECTOR(N-1 downto 0) := "1101000000" & zero;
-   SIGNAL v3 : STD_LOGIC_VECTOR(N-1 downto 0) := "0100101100" & zero;
-    
+   SIGNAL o1 : STD_LOGIC_VECTOR((10*M) -1 downto 0) := "0010000000001000000000100000000010000000001000000000100000000010000000001000000000100000000010000000";
+   SIGNAL o2 : STD_LOGIC_VECTOR((10*M) -1 downto 0) := "1110000000111000000011100000001110000000111000000011100000001110000000111000000011100000001110000000";
+   SIGNAL o3 : STD_LOGIC_VECTOR((10*M) -1 downto 0) := "0001111110000111111000011111100001111110000111111000011111100001111110000111111000011111100001111110";
+   SIGNAL o4 : STD_LOGIC_VECTOR((10*M) -1 downto 0) := "0001111100000111110000011111000001111100000111110000011111000001111100000111110000011111000001111100";
+
    signal test_case_array : test_case_array_type := (
-        ((OTHERS => '0'), (OTHERS => '0'), 128), -- change these
-	((OTHERS => '0'), (OTHERS => '1'), -128),
-	((OTHERS => '1'), (OTHERS => '1'), 128),
-	(input1, v1, 126),
-	(input2, v2, 124),
-	(input3, v3, 122)
+        ((OTHERS => '0'), o1), --128
+	((OTHERS => '0'), o1), -- 128
+	((OTHERS => '1'), o2), ---128
+	(v1, o3), --126
+	(v2, o4) -- 124
    ); 
 
 	COMPONENT bmxbv_128_10 IS
@@ -43,18 +41,17 @@ ARCHITECTURE test OF bmxbv_tb IS
 		PORT(CLOCK_50 : IN  STD_LOGIC;
 			START	: IN	STD_LOGIC;
 			vix 		: IN  STD_LOGIC_VECTOR(N-1 downto 0);
-			qwx		: IN	STD_LOGIC_VECTOR(N-1 downto 0);
-			vox		: OUT	INTEGER := 0;
+			vox		: OUT	STD_LOGIC_VECTOR((10*M) -1 downto 0) := (OTHERS => '0');
 			DONE		: OUT STD_LOGIC := '0');  
 	END COMPONENT;
   
 	SIGNAL START, DONE, CLOCK_50 : STD_LOGIC := '0';
-	SIGNAL vix, qwx	:	STD_LOGIC_VECTOR(N-1 downto 0) := (OTHERS => '0');
-	SIGNAL vox	:	INTEGER	:= 0;
+	SIGNAL vix	:	STD_LOGIC_VECTOR(N-1 downto 0) := (OTHERS => '0');
+	SIGNAL vox	:	STD_LOGIC_VECTOR((10*M) -1 downto 0) := (OTHERS => '0');
 	
 BEGIN
 
-   dut : bmxbv_128_10 PORT MAP(START => START, CLOCK_50 => CLOCK_50, vix => vix, qwx => qwx, vox => vox, DONE => DONE); 
+   dut : bmxbv_128_10 PORT MAP(START => START, CLOCK_50 => CLOCK_50, vix => vix, vox => vox, DONE => DONE); 
  
    PROCESS
 	BEGIN   
@@ -62,18 +59,17 @@ BEGIN
       FOR i IN test_case_array'LOW TO test_case_array'HIGH LOOP
         
         REPORT "-------------------------------------------";
-        REPORT "Test case " & integer'image(i) & ":" & " vix = " & integer'image(to_integer(UNSIGNED(test_case_array(i).vix))) & " qwx = " & integer'image(to_integer(UNSIGNED(test_case_array(i).qwx)));
+        REPORT "Test case " & integer'image(i) & ":" & " vix = " & integer'image(to_integer(UNSIGNED(test_case_array(i).vix)));
         
         vix <= test_case_array(i).vix;  
-	qwx <= test_case_array(i).qwx;
-	START <= '1';	
-	WAIT FOR 3 ns;
-	START <= '0';  
+		  START <= '1';	
+		  WAIT FOR 1 ns;
+		  START <= '0';  
         WAIT UNTIL (DONE = '1');
 	
               
-        REPORT "Expected result: vox = " & integer'image(test_case_array(i).expected_vox);
-        REPORT "Observed result: vox = " & integer'image(vox);
+        REPORT "Expected result: vox = " & integer'image(TO_INTEGER(UNSIGNED(test_case_array(i).expected_vox)));
+        REPORT "Observed result: vox = " & integer'image(TO_INTEGER(UNSIGNED(vox)));
                                                                     
         ASSERT (vox = test_case_array(i).expected_vox)
             REPORT "MISMATCH.  THERE IS A PROBLEM IN YOUR DESIGN THAT YOU NEED TO FIX"

@@ -1,0 +1,59 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+
+ENTITY bnn IS 
+	GENERIC(N1 	: NATURAL := 256;
+			  N2 	: NATURAL := 128;
+			  i2	: NATURAL := 128;
+			  j2	: NATURAL := 256;
+			  i3	: NATURAL := 10;
+			  j3	: NATURAL := 128);
+	PORT(RESET			: IN	STD_LOGIC;  
+		CLOCK_50 		: IN  STD_LOGIC;
+		NUM_ENCODED		: OUT STD_LOGIC_VECTOR(9 downto 0) := (OTHERS => '0');  
+		DONE				: OUT STD_LOGIC := '0');
+END bnn;
+
+ARCHITECTURE RTL OF bnn IS
+
+	COMPONENT bmxbv_256_128 IS
+	GENERIC(N 	: NATURAL := 256;
+			  M	: NATURAL := 128); 
+	PORT(CLOCK_50 : IN  STD_LOGIC;
+		START	: IN	STD_LOGIC;
+		vix 		: IN  STD_LOGIC_VECTOR(N-1 downto 0);
+		vox		: OUT	STD_LOGIC_VECTOR((11*M) -1 downto 0) := (OTHERS => '0');
+		DONE		: OUT STD_LOGIC := '0'); 
+	END COMPONENT;
+		
+	COMPONENT bmxbv_128_10 IS
+		GENERIC(N 	: NATURAL := 128;
+				  M	: NATURAL := 10); 
+		PORT(CLOCK_50 : IN  STD_LOGIC;
+			START	: IN	STD_LOGIC;
+			vix 		: IN  STD_LOGIC_VECTOR(N-1 downto 0);
+			vox		: OUT	STD_LOGIC_VECTOR((10*M) -1 downto 0) := (OTHERS => '0');
+			DONE		: OUT STD_LOGIC := '0');  
+	END COMPONENT;
+	
+	SIGNAL b1_START, b1_DONE 	: STD_LOGIC := '0';
+	SIGNAL vi2 		: STD_LOGIC_VECTOR(N1-1 downto 0) := (OTHERS => '0');
+	SIGNAL b1_vox 	: STD_LOGIC_VECTOR((11*i2) -1 downto 0) := (OTHERS => '0');
+	
+	SIGNAL b2_START, b2_DONE	: STD_LOGIC := '0';
+	SIGNAL vi3		: STD_LOGIC_VECTOR(N2-1 downto 0) := (OTHERS => '0');
+	SIGNAL b2_vox 	: STD_LOGIC_VECTOR((10*i3) -1 downto 0) := (OTHERS => '0');
+	
+	SIGNAL vo2 : STD_LOGIC_VECTOR((11*128) -1 downto 0) := (OTHERS => '0');
+	SIGNAL vo3 : STD_LOGIC_VECTOR((10*10) -1 downto 0) := (OTHERS => '0');
+	
+BEGIN
+
+	b1: bmxbv_256_128 PORT MAP(CLOCK_50 => CLOCK_50, START => b1_START, vix => vi2, vox => b1_vox, DONE => b1_DONE);
+	
+	--b2: bmxbv_128_10 PORT MAP(CLOCK_50 => CLOCK_50, START => b2_START, vix => vi3, vox => b2_vox, DONE => b2_DONE);
+
+
+END RTL;
