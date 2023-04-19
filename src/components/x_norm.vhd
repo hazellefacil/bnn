@@ -3,6 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
+
 -- Entity part of the description.  Describes inputs and outputs
 
 entity x_norm is
@@ -13,6 +14,7 @@ entity x_norm is
 	  port(
 			CLOCK_50 : in std_logic; 
 			v_done 	: in std_logic;
+			rst		: in std_logic;
 			q_e 		: in std_logic_vector(numLen - 1 downto 0); 
 			mean 		: in std_logic_vector(numLen - 1 downto 0);
 			variance : in std_logic_vector(numLen - 1 downto 0); 
@@ -47,11 +49,18 @@ architecture behavioural of x_norm is
 			square := integer(sqrt(real(eps+var)));
 			
 		-- round this value st we can divide by it 
+		
+		IF rst = '1' THEN 
+			state <= s_init; 
+		
+		ELSIF(rising_edge(CLOCK_50)) THEN
+		
 			
 		CASE state IS 
 			WHEN s_init =>
 				x_norm_done <= '0';
 				num := 0;
+				count := 0;
 				x_norm_temp <= (others => '0');
 				
 				state <= s_wait; 
@@ -72,12 +81,13 @@ architecture behavioural of x_norm is
 				IF(num-numLen +1 >= 0) THEN
 					
 					--x_Norm(count) = VOB(count) - mean / sqrt(variance + epsilon) 
+					--it's saying integer divide by 0
 				
-					t_vob := (to_integer(unsigned(VOB(num DOWNTO num-numLen + 1))) - to_integer(unsigned(mean))) / square;
+					t_vob := (to_integer(signed(VOB(num DOWNTO num-numLen + 1))) - to_integer(signed(mean))) / square;
 					x_norm_temp(num DOWNTO num-numLen +1) <= std_logic_vector(to_unsigned(t_vob, numLen));
-				
+					
 				END IF; 
-				
+								
 				num := num - numLen;
 				count := count + 1;
 				
@@ -91,6 +101,8 @@ architecture behavioural of x_norm is
 				state <= s_done;
 		
 		END CASE; 
+		
+		END IF;
 		
 	END PROCESS; 
 	
