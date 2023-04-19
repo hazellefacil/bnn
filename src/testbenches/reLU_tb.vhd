@@ -18,7 +18,7 @@ architecture Behavioural of reLU_tb is
 
    -- Define a type that is an array of the record.
 
-   TYPE test_case_array_type IS ARRAY (0 to 1) OF test_case_record;
+   TYPE test_case_array_type IS ARRAY (0 to 3) OF test_case_record;
      
    -- Define the array itself.  We will initialize it, one line per test vector.
    -- If we want to add more tests, or change the tests, we can do it here.
@@ -32,6 +32,12 @@ architecture Behavioural of reLU_tb is
 		,
 		('0' & x"1" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8",
 		 "11111111")
+		,
+		('1' & x"1" & '1' & x"2" & '1' & x"3" & '1' & x"4" & '1' & x"5" & '1' & x"6" & '1' & x"7" & '1' & x"8",
+		 "00000000")
+		,
+		('1' & x"0" & '1' & x"0" & '1' & x"0" & '1' & x"0" & '1' & x"0" & '1' & x"0" & '1' & x"0" & '1' & x"0",
+		 "00000000")
       );
 
 	component reLU is
@@ -89,6 +95,7 @@ architecture Behavioural of reLU_tb is
 		rst <= '1';
 		wait for T/2;
 		rst <= '0';
+		correct <= '0';
 		wait for (n+2)*T;
 		-- takes n*T ns to reset + extra time
 		-- should be in wait state now
