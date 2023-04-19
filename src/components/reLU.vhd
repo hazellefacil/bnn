@@ -42,8 +42,6 @@ begin
 				when s_reset =>
 				
 					count := 0;
-					E <= '0';
-					D <= '0';
 					state := s_clear;
 					
 					relu_done <= '0';
