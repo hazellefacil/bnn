@@ -32,7 +32,7 @@ SIGNAL VOB_int : STD_LOGIC_VECTOR(n*numLen -1 DOWNTO 0);
 begin
 	
 
-	PROCESS(CLOCK_50)
+	PROCESS(CLOCK_50, rst)
 	variable vc, m, square, shift, count : integer := 0;
 	variable pv_calc, temp2 	: STD_LOGIC_VECTOR(numLen*2 -1 DOWNTO 0);
 	
@@ -44,7 +44,9 @@ begin
 		shift := 7;
 	END IF;
 	
-	IF(rising_edge(CLOCK_50)) THEN 
+	if rst = '1' then
+		state <= s_init;
+	ELSIF(rising_edge(CLOCK_50)) THEN 
 	
 		CASE state IS 
 		
