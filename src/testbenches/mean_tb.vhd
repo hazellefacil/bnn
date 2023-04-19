@@ -8,7 +8,7 @@ end mean_tb;
 architecture Behavioural of mean_tb is
 
 	constant n : integer := 8;
-	constant numLen : integer := 6; -- 5 before
+	constant numLen : integer := 5;
 	constant T : time := 10 ns;
 
 	TYPE test_case_record IS RECORD
@@ -18,7 +18,7 @@ architecture Behavioural of mean_tb is
 
    -- Define a type that is an array of the record.
 
-   TYPE test_case_array_type IS ARRAY (0 to 1) OF test_case_record;
+   TYPE test_case_array_type IS ARRAY (0 to 3) OF test_case_record;
 
    -- Define the array itself.  We will initialize it, one line per test vector.
    -- If we want to add more tests, or change the tests, we can do it here.
@@ -27,16 +27,17 @@ architecture Behavioural of mean_tb is
    -- represent inputs to apply, and three represent the expected outputs.
     
    signal test_case_array : test_case_array_type := (
---		('0' & x"5" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8",
---		 '0' & x"5")
---		,
---		('1' & x"5" & '1' & x"2" & '1' & x"3" & '1' & x"4" & '1' & x"5" & '1' & x"6" & '1' & x"7" & '1' & x"8",
---		 '1' & x"5")
-		("01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0",
-		 "01" & x"0")
+		('0' & x"5" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8",
+		 '0' & x"5")
 		,
-		("01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0",
-		 "01" & x"0")
+		('1' & x"5" & '1' & x"2" & '1' & x"3" & '1' & x"4" & '1' & x"5" & '1' & x"6" & '1' & x"7" & '1' & x"8",
+		 '1' & x"5")
+		,
+		('1' & x"0" & '1' & x"0" & '1' & x"0" & '1' & x"0" & '1' & x"0" & '1' & x"0" & '1' & x"0" & '1' & x"0",
+		 '0' & x"0")
+		,
+		('0' & x"8" & '0' & x"8" & '0' & x"8" & '0' & x"8" & '0' & x"8" & '0' & x"8" & '0' & x"8" & '0' & x"8",
+		 '0' & x"8")
       );
 
 	component mean is
@@ -104,7 +105,7 @@ architecture Behavioural of mean_tb is
 		wait for T/2;
 		-- wait to settle
 		start <= '1';
-		wait for (n+6)*T;
+		wait for (n+2)*T;
 		-- takes n*T ns to calculate + extra time
 		if mean_o = test_case_array(i).expected_mean then 
 			correct <= '1';
