@@ -20,7 +20,7 @@ architecture Behavioural of Bn_tb is
 
    -- Define a type that is an array of the record.
 
-   TYPE test_case_array_type IS ARRAY (0 to 1) OF test_case_record;
+   TYPE test_case_array_type IS ARRAY (0 to 3) OF test_case_record;
 
    -- Define the array itself.  We will initialize it, one line per test vector.
    -- If we want to add more tests, or change the tests, we can do it here.
@@ -29,15 +29,25 @@ architecture Behavioural of Bn_tb is
    -- represent inputs to apply, and three represent the expected outputs.
     
    signal test_case_array : test_case_array_type := (
-		('0' & x"1" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"1",
+		('0' & x"1" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"1", -- multiply by 2, add 1
 		 '0' & x"2",
 		 '0' & x"1",
 		 '0' & x"3" & '0' & x"5" & '0' & x"7" & '0' & x"9" & '0' & x"B" & '0' & x"D" & '0' & x"F" & '0' & x"3")
 		,
-		('0' & x"1" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8",
+		('0' & x"1" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8", -- multiply by -2, add 1
 		 '1' & x"2",
 		 '0' & x"1",
 		 '1' & x"1" & '1' & x"3" & '1' & x"5" & '1' & x"7" & '1' & x"9" & '1' & x"B" & '1' & x"D" & '1' & x"F")
+		,
+		('0' & x"1" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8", -- beta goes through
+		 '0' & x"0",
+		 '0' & x"1",
+		 '0' & x"1" & '0' & x"1" & '0' & x"1" & '0' & x"1" & '0' & x"1" & '0' & x"1" & '0' & x"1" & '0' & x"1")
+		,
+		('0' & x"1" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8", -- go straight through
+		 '1' & x"1",
+		 '0' & x"0",
+		 '0' & x"1" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8")
       );
 
 	component Bn is
@@ -101,7 +111,10 @@ architecture Behavioural of Bn_tb is
 	
       start <= '0';
 		rst <= '1';
+		b <= '0';
+		g <= '0';
 		wait for T/2;
+		correct <= '0';
 		rst <= '0';
 		wait for (n+2)*T;
 		-- takes n*T ns to reset + extra time

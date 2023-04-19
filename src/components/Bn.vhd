@@ -28,7 +28,8 @@ end Bn;
 architecture behavioural of Bn is
 
 	type state_type is (s_reset, s_wait, s_Bn, s_done);
-
+	signal state_o : state_type;
+	
 begin
 
 	process(CLOCK_50, rst)
@@ -51,6 +52,7 @@ begin
 				
 					count := 0;
 					state := s_wait;
+					Bn_done <= '0';
 				
 				when s_wait =>
 				
@@ -59,6 +61,7 @@ begin
 					else
 						state := s_wait;
 					end if;
+					Bn_done <= '0';
 					
 				when s_Bn =>
 				
@@ -96,6 +99,7 @@ begin
 					else
 						state := s_Bn;
 					end if;
+					Bn_done <= '0';
 				
 				when s_done =>
 				
@@ -107,6 +111,8 @@ begin
 					state := s_reset;
 			
 			end case;
+		
+		state_o <= state;
 		
 		end if;
 	

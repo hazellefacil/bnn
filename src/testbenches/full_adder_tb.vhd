@@ -61,7 +61,7 @@ ARCHITECTURE behavioural OF full_adder_tb IS
 		port(
 			pv : in std_logic_vector(n*numLen - 1 downto 0);
 			start : in std_logic;
-			sum : out std_logic_vector(numLen - 1 downto 0)
+			variance : out std_logic_vector(numLen - 1 downto 0)
 			);
 	end COMPONENT;
 
@@ -119,7 +119,7 @@ begin
 	PORT MAP(
 		pv => pv,
 		start => start,
-		sum => sum);
+		variance => sum);
 
    -- Code to drive inputs and check outputs.  This is written by one process.
    -- Note there is nothing in the sensitivity list here; this means the process is
