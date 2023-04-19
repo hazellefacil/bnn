@@ -101,10 +101,10 @@ begin
 					if temp < 0 then
 						temp := -temp;
 						temp2 := std_logic_vector(to_unsigned(temp, temp2'length));
-						mean <= '1' & std_logic_vector(to_unsigned(to_integer(shift_right(unsigned(temp2), log2_n)), mean'length - 1));
+						mean <= '1' & std_logic_vector(to_unsigned(to_integer(shift_right(unsigned(temp2), log2_n + 1)), mean'length - 1));
 					else
 						temp2 := std_logic_vector(to_unsigned(temp, temp2'length));
-						mean <= '0' & std_logic_vector(to_unsigned(to_integer(shift_right(unsigned(temp2), log2_n)), mean'length - 1));
+						mean <= '0' & std_logic_vector(to_unsigned(to_integer(shift_right(unsigned(temp2), log2_n + 1)), mean'length - 1));
 					end if;
 					
 					state := s_done;

@@ -8,12 +8,12 @@ end mean_tb;
 architecture Behavioural of mean_tb is
 
 	constant n : integer := 8;
-	constant numLen : integer := 5;
+	constant numLen : integer := 6; -- 5 before
 	constant T : time := 10 ns;
 
 	TYPE test_case_record IS RECORD
 		vob : std_logic_vector(n*numLen - 1 downto 0);
-		expected_mean_o : std_logic_vector(numLen - 1 downto 0);
+		expected_mean : std_logic_vector(numLen - 1 downto 0);
    END RECORD;
 
    -- Define a type that is an array of the record.
@@ -27,11 +27,16 @@ architecture Behavioural of mean_tb is
    -- represent inputs to apply, and three represent the expected outputs.
     
    signal test_case_array : test_case_array_type := (
-		('0' & x"5" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8",
-		 '0' & x"5")
+--		('0' & x"5" & '0' & x"2" & '0' & x"3" & '0' & x"4" & '0' & x"5" & '0' & x"6" & '0' & x"7" & '0' & x"8",
+--		 '0' & x"5")
+--		,
+--		('1' & x"5" & '1' & x"2" & '1' & x"3" & '1' & x"4" & '1' & x"5" & '1' & x"6" & '1' & x"7" & '1' & x"8",
+--		 '1' & x"5")
+		("01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0",
+		 "01" & x"0")
 		,
-		('1' & x"5" & '1' & x"2" & '1' & x"3" & '1' & x"4" & '1' & x"5" & '1' & x"6" & '1' & x"7" & '1' & x"8",
-		 '1' & x"5")
+		("01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0" & "01" & x"0",
+		 "01" & x"0")
       );
 
 	component mean is
@@ -44,7 +49,7 @@ architecture Behavioural of mean_tb is
 			vob : in std_logic_vector(n*numLen - 1 downto 0);
 			rst : in std_logic;
 			start : in std_logic;
-			mean_o : out std_logic_vector(numLen - 1 downto 0);
+			mean : out std_logic_vector(numLen - 1 downto 0);
 			mean_done : out std_logic
 			);
 	end component;
@@ -56,6 +61,7 @@ architecture Behavioural of mean_tb is
 	
 	signal mean_o : std_logic_vector(numLen - 1 downto 0);
 	signal mean_done : std_logic;
+	signal correct : std_logic := '0';
 	
 	begin
 
@@ -87,6 +93,7 @@ architecture Behavioural of mean_tb is
       start <= '0';
 		rst <= '1';
 		wait for T/2;
+		correct <= '0';
 		rst <= '0';
 		wait for (n+2)*T;
 		-- takes n*T ns to reset + extra time
@@ -97,8 +104,13 @@ architecture Behavioural of mean_tb is
 		wait for T/2;
 		-- wait to settle
 		start <= '1';
-		wait for (n+2)*T;
+		wait for (n+6)*T;
 		-- takes n*T ns to calculate + extra time
+		if mean_o = test_case_array(i).expected_mean then 
+			correct <= '1';
+		else
+			correct <= '0';
+		end if;
 		
    end loop;
 	
