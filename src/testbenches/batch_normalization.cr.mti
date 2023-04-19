@@ -1,0 +1,58 @@
+C:/Users/hazel/ensc350_proj/bnn/src/components/mean.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/hazel/ensc350_proj/bnn/src/components/mean.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Compiling entity mean
+-- Compiling architecture behavioural of mean
+
+} {} {}} C:/Users/hazel/ensc350_proj/bnn/src/components/BatchNormalization.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/hazel/ensc350_proj/bnn/src/components/BatchNormalization.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity BatchNormalization
+-- Compiling architecture behavioural of BatchNormalization
+
+} {} {}} C:/Users/hazel/ensc350_proj/bnn/src/components/full_adder.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/hazel/ensc350_proj/bnn/src/components/full_adder.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity full_adder
+-- Compiling architecture behavioural of full_adder
+
+} {} {}} C:/Users/hazel/ensc350_proj/bnn/src/components/x_norm.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/hazel/ensc350_proj/bnn/src/components/x_norm.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Compiling entity x_norm
+-- Compiling architecture behavioural of x_norm
+
+} {} {}} C:/Users/hazel/ensc350_proj/bnn/src/components/prevariance.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/hazel/ensc350_proj/bnn/src/components/prevariance.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Compiling entity prevariance
+-- Compiling architecture behavioural of prevariance
+
+} {} {}} C:/Users/hazel/ensc350_proj/bnn/src/components/Bn.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/hazel/ensc350_proj/bnn/src/components/Bn.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity Bn
+-- Compiling architecture behavioural of Bn
+
+} {} {}}

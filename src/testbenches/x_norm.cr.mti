@@ -1,0 +1,20 @@
+C:/Users/hazel/ensc350_proj/bnn/src/testbenches/x_norm_tb.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/hazel/ensc350_proj/bnn/src/testbenches/x_norm_tb.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity x_norm_tb
+-- Compiling architecture behaviour of x_norm_tb
+
+} {} {}} C:/Users/hazel/ensc350_proj/bnn/src/components/x_norm.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/hazel/ensc350_proj/bnn/src/components/x_norm.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package MATH_REAL
+-- Compiling entity x_norm
+-- Compiling architecture behavioural of x_norm
+
+} {} {}}

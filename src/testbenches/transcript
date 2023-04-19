@@ -1,0 +1,354 @@
+# Compile of prevariance.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 2 compiles, 0 failed with no errors.
+vsim work.batchnormalization_tb
+# vsim work.batchnormalization_tb 
+# Start time: 12:14:48 on Apr 19,2023
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.batchnormalization_tb(behaviour)
+# Loading work.batchnormalization(behavioural)
+# Loading ieee.math_real(body)
+# Loading work.mean(behavioural)
+# Loading work.prevariance(behavioural)
+# Loading work.full_adder(behavioural)
+# Loading work.x_norm(behavioural)
+# Loading work.bn(behavioural)
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+add wave -position insertpoint  \
+sim:/batchnormalization_tb/Bn_done \
+sim:/batchnormalization_tb/Bn_out \
+sim:/batchnormalization_tb/CLOCK_50 \
+sim:/batchnormalization_tb/b \
+sim:/batchnormalization_tb/beta \
+sim:/batchnormalization_tb/correct \
+sim:/batchnormalization_tb/epsilon \
+sim:/batchnormalization_tb/g \
+sim:/batchnormalization_tb/gamma \
+sim:/batchnormalization_tb/n \
+sim:/batchnormalization_tb/numLen \
+sim:/batchnormalization_tb/rst \
+sim:/batchnormalization_tb/start \
+sim:/batchnormalization_tb/vob
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: hazel  Hostname: DESKTOP-LT9O24G  ProcessID: 21556
+#           Attempting to use alternate WLF file "./wlftan9tnf".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftan9tnf
+restart
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+restart
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 0 failed with no errors.
+restart
+# Loading work.batchnormalization_tb(behaviour)
+# Loading work.batchnormalization(behavioural)
+# Loading work.mean(behavioural)
+# Loading work.prevariance(behavioural)
+# Loading work.full_adder(behavioural)
+# Loading work.x_norm(behavioural)
+# Loading work.bn(behavioural)
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+add wave -position insertpoint v_done
+# (vish-4014) No objects found matching 'v_done'.
+add wave -position insertpoint sim:/batchnormalization_tb/dut1/pv_done
+add wave -position insertpoint sim:/batchnormalization_tb/dut1/x_norm_done
+restart
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 0 failed with no errors.
+restart
+# Loading work.batchnormalization_tb(behaviour)
+# Loading work.batchnormalization(behavioural)
+# Loading work.mean(behavioural)
+# Loading work.prevariance(behavioural)
+# Loading work.full_adder(behavioural)
+# Loading work.x_norm(behavioural)
+# Loading work.bn(behavioural)
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+add wave -position insertpoint sim:/batchnormalization_tb/dut1/u3/x_norm
+add wave -position insertpoint  \
+sim:/batchnormalization_tb/dut1/u3/variance
+add wave -position insertpoint  \
+sim:/batchnormalization_tb/dut1/u0/mean
+add wave -position insertpoint sim:/batchnormalization_tb/dut1/u1/PV
+restart
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 0 failed with no errors.
+restart
+# Loading work.batchnormalization_tb(behaviour)
+# Loading work.batchnormalization(behavioural)
+# Loading work.mean(behavioural)
+# Loading work.prevariance(behavioural)
+# Loading work.full_adder(behavioural)
+# Loading work.x_norm(behavioural)
+# Loading work.bn(behavioural)
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 0 failed with no errors.
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd failed with 2 errors.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 1 failed with 2 errors.
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 0 failed with no errors.
+restart
+# Loading work.batchnormalization_tb(behaviour)
+# Loading work.batchnormalization(behavioural)
+# Loading work.mean(behavioural)
+# Loading work.prevariance(behavioural)
+# Loading work.full_adder(behavioural)
+# Loading work.x_norm(behavioural)
+# Loading work.bn(behavioural)
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 0 failed with no errors.
+restart
+# Loading work.batchnormalization_tb(behaviour)
+# Loading work.batchnormalization(behavioural)
+# Loading work.mean(behavioural)
+# Loading work.prevariance(behavioural)
+# Loading work.full_adder(behavioural)
+# Loading work.x_norm(behavioural)
+# Loading work.bn(behavioural)
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 457 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 459 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 461 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 463 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# Compile of BatchNormalization_tb.vhd failed with 2 errors.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 1 failed with 2 errors.
+# Compile of BatchNormalization_tb.vhd failed with 2 errors.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 1 failed with 2 errors.
+# Compile of BatchNormalization_tb.vhd failed with 2 errors.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 1 failed with 2 errors.
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 0 failed with no errors.
+restart
+# Loading work.batchnormalization_tb(behaviour)
+# Loading work.batchnormalization(behavioural)
+# Loading work.mean(behavioural)
+# Loading work.prevariance(behavioural)
+# Loading work.full_adder(behavioural)
+# Loading work.x_norm(behavioural)
+# Loading work.bn(behavioural)
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 457 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 459 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 461 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 463 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 0 failed with no errors.
+restart
+# Loading work.batchnormalization_tb(behaviour)
+# Loading work.batchnormalization(behavioural)
+# Loading work.mean(behavioural)
+# Loading work.prevariance(behavioural)
+# Loading work.full_adder(behavioural)
+# Loading work.x_norm(behavioural)
+# Loading work.bn(behavioural)
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 457 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 459 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 461 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 463 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# Compile of BatchNormalization_tb.vhd failed with 2 errors.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 1 failed with 2 errors.
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 0 failed with no errors.
+restart
+# Loading work.batchnormalization_tb(behaviour)
+# Loading work.batchnormalization(behavioural)
+# Loading work.mean(behavioural)
+# Loading work.prevariance(behavioural)
+# Loading work.full_adder(behavioural)
+# Loading work.x_norm(behavioural)
+# Loading work.bn(behavioural)
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 457 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 459 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 461 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 463 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 0 failed with no errors.
+restart
+# Loading work.batchnormalization_tb(behaviour)
+# Loading work.batchnormalization(behavioural)
+# Loading work.mean(behavioural)
+# Loading work.prevariance(behavioural)
+# Loading work.full_adder(behavioural)
+# Loading work.x_norm(behavioural)
+# Loading work.bn(behavioural)
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 457 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 459 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 461 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 463 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# Compile of BatchNormalization_tb.vhd was successful.
+# Compile of BatchNormalization.vhd was successful.
+# Compile of mean.vhd was successful.
+# Compile of Bn.vhd was successful.
+# Compile of prevariance.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of x_norm.vhd was successful.
+# 7 compiles, 0 failed with no errors.
+run
+restart
+# Loading work.batchnormalization_tb(behaviour)
+# Loading work.batchnormalization(behavioural)
+# Loading work.mean(behavioural)
+# Loading work.prevariance(behavioural)
+# Loading work.full_adder(behavioural)
+# Loading work.x_norm(behavioural)
+# Loading work.bn(behavioural)
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 457 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 459 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 461 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
+# ** Error: (vsim-86) Argument value -1 is not in bounds of subtype NATURAL.
+#    Time: 463 ns  Iteration: 1  Instance: /batchnormalization_tb/dut1/u3
