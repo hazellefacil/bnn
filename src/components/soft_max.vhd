@@ -14,8 +14,9 @@ entity soft_max is
 		CLOCK_50 : in std_logic; 
 		bb3_done : in std_logic;  
 		reset : in std_logic;
-		vo_3 : in STD_LOGIC_VECTOR(9*numLen - 1 downto 0); 
-		num_encoded : out std_logic_vector(9 downto 0)
+		vo_3 : in STD_LOGIC_VECTOR(n*numLen - 1 downto 0); 
+		num_encoded : out std_logic_vector(n - 1 downto 0);
+		done : out std_logic
 		);
 end soft_max;
 		
@@ -23,7 +24,7 @@ architecture behavioural of soft_max is
 
 TYPE state_type IS (s_init, s_wait, s_findMax, s_oneHot, s_done); 
 SIGNAL state : state_type := s_init; 
-SIGNAL softmax_output, encoded_value : std_logic_vector(9 downto 0);
+SIGNAL softmax_output, encoded_value : std_logic_vector(n - 1 downto 0);
 SIGNAL vector_temp : std_logic_vector(3 DOWNTO 0); 
 
 begin
@@ -33,18 +34,24 @@ begin
 --from this it finds the max
 --return one hot encoded value
 
-	PROCESS(CLOCK_50) 
+	PROCESS(CLOCK_50, reset) 
 	--variables here 
 	variable count, max_index, t_max_index, t_max, num: integer := 0;
 	
 	BEGIN
+	
+	if reset = '1' then
+		state <= s_init;
+		
+	elsif rising_edge(CLOCK_50) then
 	
 		CASE state IS 
 
 			WHEN s_init => 
 				count := 0;  
 				vector_temp <= (others => '0');
-				
+				num_encoded <= (others => '1');
+				done <= '0';
 				state <= s_wait; 
 				
 			WHEN s_wait => 
@@ -71,7 +78,7 @@ begin
 				num := num - numLen; 
 				count := count + 1; 
 				
-				IF (count > 10) THEN 
+				IF (count = n) THEN 
 					max_index := t_max_index; 
 					state <= s_oneHot;
 				END IF; 
@@ -79,15 +86,19 @@ begin
 			WHEN s_oneHot => 
 				
 				encoded_value <= (others => '0');
-				encoded_value(max_index) <= '1'; 
+				encoded_value(n - max_index - 1) <= '1'; 
 				state <= s_done; 
 				
 			WHEN s_done => 
 		
-			num_encoded <= encoded_value;
-			state <= s_done;
+				num_encoded <= encoded_value;
+				done <= '1';
+				state <= s_done;
 			
 		END CASE; 
+		
+	end if;
+	
 	END PROCESS; 
 	
 	
